@@ -1,0 +1,23 @@
+{
+  "name": "die-by-the-box",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowacademyhu/die-by-the-box.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flowacademyhu/die-by-the-box/issues"
+  },
+  "homepage": "https://github.com/flowacademyhu/die-by-the-box#readme",
+  "dependencies": {
+    "axel": "0.0.3",
+    "table": "^6.0.3"
+  }
+}

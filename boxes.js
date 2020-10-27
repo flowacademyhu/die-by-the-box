@@ -1,31 +1,18 @@
-const spawnBoxes = (mapArr, boxNum) => {
-    for (let j = 0; j < mapArr[0].length; j++) {
-        mapArr[0][j] = ' ';
-    }
+const map = require("./map");
+
+const spawnBoxes = (boxNum, szelesseg) => {
+    let boxTomb = []
+    let boxdarab = { posx: 0, posy: 1,}
+    let box_x = 0; 
     for (let i = 0; i < boxNum; i++) {
-        const j = Math.floor(Math.random() * mapArr[0].length);
-        mapArr[0][j] = 'X';
+        boxdarab = { posx: 0, posy: 1,}
+        box_x = Math.floor(Math.random() * szelesseg);
+        boxdarab.posx = (box_x);
+        boxTomb.push(boxdarab);
     }
-};
-
-const falling = (mapArr) => {
-    const height = mapArr.length;
-    for (let j = 0; j < mapArr[0].length; j++) {
-        mapArr[height - 1][j] = ' ';
-    }
-    for (let i = height - 1; i > 0; i--) {
-        for (let j = 0; j < mapArr[i].length; j++) {
-            for (let g = j; g < mapArr.length)
-
-            if (mapArr[i - 1][j] === 'X') {
-                mapArr[i][j] = 'X';
-                mapArr[i - 1][j] = ' ';
-            }
-        }
-    }
-};
+    return boxTomb
+    };
 
 module.exports = {
-    spawnBoxes,
-    falling
+    spawnBoxes
 };
