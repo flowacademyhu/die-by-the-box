@@ -14,7 +14,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
   for (let i = 0; i < kitoltendo.length; i++) {
     for (let k = 0; k < kitoltendo[i].length; k++) {
       kitoltendo[i][k] = ' ';
-      if ((i === player.posx) && (k === player.posy)) {
+      if ((i === player.posy) && (k === player.posx)) {
         kitoltendo[i][k] = 'P';
       }
       for (let l = 0; l < boxstuff.length; l++) {
