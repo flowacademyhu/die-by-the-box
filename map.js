@@ -9,19 +9,34 @@ const palyaKeret = (szelesseg, magassag) => {
   return hasznalttomb;
 };
 
-const palyaKitoltes = (kitoltendo, player) => {
+
+const palyaKitoltes = (kitoltendo, player, boxstuff) => {
   for (let i = 0; i < kitoltendo.length; i++) {
     for (let k = 0; k < kitoltendo[i].length; k++) {
       kitoltendo[i][k] = ' ';
       if ((i === player.posx) && (k === player.posy)) {
         kitoltendo[i][k] = 'P';
       }
+      for (let l = 0; l < boxstuff.length; l++) {
+        if (i === boxstuff[l].posy && k === boxstuff[l].posx) {
+          kitoltendo[i][k] = 'B';
+        }
+      }
     }
   }
+  console.clear();
   return kitoltendo;
+};
+
+
+const drawMap = (map) => {
+  const text = table.table(map);
+  console.clear();
+  console.log(text);
 };
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
+    drawMap
   };
