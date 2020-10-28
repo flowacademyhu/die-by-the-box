@@ -81,23 +81,22 @@ let key;
     if (key === 'q') {
       process.exit();
     }
-      if (key === 'a' && player.posx > 1 && kitoltendo[player.posy][player.posx - 1] !== 'X') { // Ha az egyel balra nincs doboz akkor 1-t balra lép
-        player.posx--;
+      if (key === 'a' && player.posy > 1 && tomb_ami_a_map[player.posx][player.posy - 1] !== 'B') { // Ha az egyel balra nincs doboz akkor 1-t balra lép
+        player.posy--;
      } 
      // Majd itt kezd el ugrálni a dobozokra -->
-     //else if (key === 'a' && player.posx > 1 && kitoltendo[player.posy +1][player.posx - 1] === 'X') { // Felugrik az egyel balra lévő 1-gyel magasabban lévő doboz tetejére 
+     //else if (key === 'a' && player.posx > 1 && tomb_ami_a_map[player.posy +1][player.posx - 1] === 'X') { // Felugrik az egyel balra lévő 1-gyel magasabban lévő doboz tetejére 
      //   player.posx--;
     //    player.posy++; 
     //  }
-      if (key === 'd' && player.posx < szelesseg-2 && kitoltendo[player.posy][player.posx - 1] !== 'X') { //jobbra lép 1et ha ott nincs doboz
-        player.posx++;
+      if (key === 'd' && player.posy < szelesseg-2 && tomb_ami_a_map[player.posx][player.posy - 1] !== 'B') { //jobbra lép 1et ha ott nincs doboz
+        player.posy++;
     } 
     // Majd itt kezd el ugrálni a dobozokra -->
-    //else if (key === 'd' && playerpos.x < width - 2 && kitoltendo[playerpos.y +1][playerpos.x + 1] === 'X') { // Felugrik az egyel jobbra lévő 1-gyel magasabban lévő doboz tetejére 
+    //else if (key === 'd' && playerpos.x < width - 2 && tomb_ami_a_map[playerpos.y +1][playerpos.x + 1] === 'X') { // Felugrik az egyel jobbra lévő 1-gyel magasabban lévő doboz tetejére 
        // playerpos.x++;
       //  playerpos.y++; 
     //}
-      refreshMap();
   });
 
 
