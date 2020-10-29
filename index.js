@@ -64,14 +64,16 @@ boxes_new = boxes.spawnBoxes(2, szelesseg)
 //regi tomb az uj elemekkel kibővítve
 //megnezzuk mennyi van aluk
 szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
-torlendo = boxes.alsotSzamolTomb(boxmany, magassag)
+torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
 //toroljuk ha eleri a szelesseget
-console.log(szamolos)
 
-if (szamolos === undefined && torlendo !== undefined && szamolos[0] === szelesseg) {
-  boxmany = boxes.alsotTorol(boxmany, torlendo)
+if (szamolos === szelesseg) {
+  boxmany = boxes.alsotTorol(boxmany, torlendo);
+  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
 }
-tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+
+console.log(szamolos)
+console.log(torlendo)
 
 // map.drawMap(tomb_ami_a_map);
 console.log(tomb_ami_a_map);
@@ -143,7 +145,7 @@ if (key === 'a') {
 }
 if (key === 'd') {
   //nem a szélén van
-  if (player.posx !== 0) {
+  if (player.posx !== szelesseg-1) {
     //dobozbqa akar szaladni balról
           if (tomb_ami_a_map[player.posy][player.posx+1] === 'B' && player.head === 'top'){
             //ráfordul_bal_also
