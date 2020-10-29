@@ -129,9 +129,8 @@ if (key === 'a') {
 }
 }
 if (key === 'd') {
-<<<<<<< HEAD
   //nem a szélén van
-  if (player.posx !== 0) {
+  if (player.posx !== szelesseg-1) {
     //dobozbqa akar szaladni balról
           if (tomb_ami_a_map[player.posy][player.posx+1] === 'B' && player.head === 'top'){
             //ráfordul_bal_also
@@ -178,11 +177,9 @@ if (key === 'd') {
   else if (player.head === 'left' && player.posx === 0) {
   if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy+1][player.posx] === ' ') {
     player.posy++
-=======
   if (player.posx !== szelesseg-1) {
     // ne spammeljunk
   player.posx++;}
->>>>>>> ef153e814b3fa36e49f7868be902b97d0acfdf50
   }
   else {player.head = 'top'}
 }
