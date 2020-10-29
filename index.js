@@ -63,7 +63,7 @@ boxes_new = boxes.spawnBoxes(2, szelesseg)
 // map.drawMap(tomb_ami_a_map);
 console.log(tomb_ami_a_map);
 counter = counter + 1
-}, 1000);
+}, 300);
 
 //regi tomb az uj elemekkel kibővítve
 
@@ -75,7 +75,6 @@ stdin.resume();
 stdin.setEncoding('utf8');
 stdin.on('data', (key) => {
   // spamszamlalo
-if (canPushKey === 0) {
 if (key === 'a') {
   //nem a szélén van
   if (player.posx !== 0) {
@@ -104,11 +103,16 @@ if (key === 'a') {
           player.posy++;
           player.posx--;
         }
+          //ballentfordul
+          else if (player.head === 'left' && (tomb_ami_a_map[player.posy+1] === undefined || tomb_ami_a_map[player.posy+1][player.posx] === 'B')) {
+            player.head = 'top';
+            player.facing = 'left';
+          }
           // maszni kell lefele
     else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'left' && tomb_ami_a_map[player.posy+1][player.posx+1] === 'B' ){
                 player.posy++}
         //sarokrol fordaul barla, balalso
-    else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy+1][player.posx] === 'B' && player.head === 'left'){
+    else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'left'){
             player.head === 'top';
           }
     else {player.posx-- }
@@ -127,7 +131,6 @@ if (key === 'd') {
   console.log(tomb_ami_a_map);
   //lehetnyomni
   canPushKey = 0;
-}
 if (key === 'q') {
   console.log('Quitter! You might as well quit life too!!!')
     process.exit(0);
