@@ -35,6 +35,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
 
 
 const drawMap = (map) => {
+  console.log('Points:', player.points, 'Lives:', player.elet);
   const text = table.table(map);
   console.clear();
   console.log(text);
