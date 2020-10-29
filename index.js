@@ -15,6 +15,8 @@ let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
 let counter = 0;
+let szamolos = 0;
+let torlendo = []
 
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
 
@@ -60,6 +62,17 @@ boxes_new = boxes.spawnBoxes(2, szelesseg)
   counter = 0;
 }
 //regi tomb az uj elemekkel kibővítve
+//megnezzuk mennyi van aluk
+szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
+torlendo = boxes.alsotSzamolTomb(boxmany, magassag)
+//toroljuk ha eleri a szelesseget
+console.log(szamolos)
+
+if (szamolos === undefined && torlendo !== undefined && szamolos[0] === szelesseg) {
+  boxmany = boxes.alsotTorol(boxmany, torlendo)
+}
+tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+
 // map.drawMap(tomb_ami_a_map);
 console.log(tomb_ami_a_map);
 counter = counter + 1

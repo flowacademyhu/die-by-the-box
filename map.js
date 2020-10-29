@@ -1,7 +1,6 @@
 const table = require('table');
 const axel = require('axel');
 
-
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
   for (let i = 0; i < hasznalttomb.length; i++) {
