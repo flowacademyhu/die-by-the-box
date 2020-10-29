@@ -9,6 +9,8 @@ let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
+let score = 0;
+let lives = 5
 
 let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left' };
 let boxmany = []
@@ -133,7 +135,9 @@ if (key === 'a') {
           else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'left'){
             player.head === 'top';
           }
-    else {player.posx-- }
+    else {player.posx-- 
+          player.facing = 'left';
+          }
     // nincs spam
 }
   else if (player.head === 'left' && player.posx === 0) {
@@ -186,7 +190,8 @@ if (key === 'd') {
           else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'right'){
             player.head === 'top';
           }
-    else {player.posx++ }
+    else {player.posx++ 
+          player.facing = 'right'}
     // nincs spam
 }
   else if (player.head === 'left' && player.posx === 0) {
