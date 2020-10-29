@@ -12,6 +12,8 @@ const canPushKey = 0;
 const szelesseg = 10;
 const magassag = 15;
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
+let score = 0;
+let lives = 5
 
 const player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left' };
 let boxmany = [];
@@ -51,30 +53,21 @@ setInterval(() => {
       }
     }
   }
-  // boxok mozgatva
-  // map kitoltes
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
-  // map kitoltve
-  // uj boxok spawnoltatasa és elheylezése időzítve!!!! counter 0zasa
-  if (counter === magassag - 1) {
-    boxes_new = [];
-    boxes_new = boxes.spawnBoxes(2, szelesseg);
-    for (let d = 0; d < boxes_new.length; d++) {
-      boxmany.push(boxes_new[d]);
-    }
-    counter = 0;
-  }
-  // regi tomb az uj elemekkel kibővítve
-  // megnezzuk mennyi van aluk
-  szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
-  torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
-  // toroljuk ha eleri a szelesseget
-  console.log(szamolos);
+  counter = 0;
+}
+//regi tomb az uj elemekkel kibővítve
+//megnezzuk mennyi van aluk
+szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
+torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
+//toroljuk ha eleri a szelesseget
 
-  if (szamolos === undefined && torlendo !== undefined && szamolos[0] === szelesseg) {
-    boxmany = boxes.alsotTorol(boxmany, torlendo);
-  }
+if (szamolos === szelesseg) {
+  boxmany = boxes.alsotTorol(boxmany, torlendo);
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+}
+
+console.log(szamolos)
+console.log(torlendo)
 
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
@@ -121,21 +114,16 @@ stdin.on('data', (key) => {
         player.posx--;
       }
 
-      // ballentfordul
-      else if (player.head === 'left' && (tomb_ami_a_map[player.posy + 1] === undefined || tomb_ami_a_map[player.posy + 1][player.posx] === 'B')) {
-        player.head = 'top';
-        player.facing = 'left';
-      }
-
-      // maszni kell lefele
-      else if (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'left' && (tomb_ami_a_map[player.posy + 1][player.posx + 1] === 'B' || tomb_ami_a_map[player.posy + 1][player.posx - 1] === undefined)) {
-        player.posy++
-        ;
-      }
-      // sarokrol fordaul barla, balalso
-      else if (tomb_ami_a_map[player.posy + 1] !== undefined && (tomb_ami_a_map[player.posy + 1][player.posx] === 'B' || (tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.posy + 1 === magassag - 1)) && player.head === 'left') {
-        player.head === 'top';
-      } else { player.posx--; }
+          // maszni kell lefele
+          else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'left' && (tomb_ami_a_map[player.posy+1][player.posx+1] === 'B' || tomb_ami_a_map[player.posy+1][player.posx-1] === undefined) ){
+                player.posy++}
+        //sarokrol fordaul barla, balalso
+          else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'left'){
+            player.head === 'top';
+          }
+    else {player.posx-- 
+          player.facing = 'left';
+          }
     // nincs spam
     } else if (player.head === 'left' && player.posx === 0) {
       if (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') {
@@ -173,31 +161,23 @@ stdin.on('data', (key) => {
         player.posx++;
       }
 
-      // jobblentfordul
-      else if (player.head === 'right' && (tomb_ami_a_map[player.posy + 1] === undefined || tomb_ami_a_map[player.posy + 1][player.posx] === 'B')) {
-        player.head = 'top';
-        player.facing = 'right';
-      }
-
-      // maszni kell lefele
-      else if (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'right' && (tomb_ami_a_map[player.posy + 1][player.posx - 1] === 'B' || tomb_ami_a_map[player.posy + 1][player.posx + 1] === undefined)) {
-        player.posy++
-        ;
-      }
-      // sarokrol fordaul jobbra, jobbalso
-      else if (tomb_ami_a_map[player.posy + 1] !== undefined && (tomb_ami_a_map[player.posy + 1][player.posx] === 'B' || (tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.posy + 1 === magassag - 1)) && player.head === 'right') {
-        player.head === 'top';
-      } else { player.posx++; }
+          // maszni kell lefele
+          else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'right' && (tomb_ami_a_map[player.posy+1][player.posx-1] === 'B' || tomb_ami_a_map[player.posy+1][player.posx+1] === undefined) ){
+                player.posy++}
+        //sarokrol fordaul jobbra, jobbalso
+          else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'right'){
+            player.head === 'top';
+          }
+    else {player.posx++ 
+          player.facing = 'right'}
     // nincs spam
-    } else if (player.head === 'left' && player.posx === 0) {
-      if (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') {
-        player.posy++;
-        if (player.posx !== szelesseg - 1) {
-          // ne spammeljunk
-          player.posx++;
-        }
-      } else { player.head = 'top'; }
-    }
+}
+  else if (player.head === 'left' && player.posx === 0) {
+  if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy+1][player.posx] === ' ') {
+    player.posy++
+  if (player.posx !== szelesseg-1) {
+    // ne spammeljunk
+  player.posy++;}
   }
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
