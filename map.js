@@ -16,12 +16,18 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
     for (let k = 0; k < kitoltendo[i].length; k++) {
       kitoltendo[i][k] = ' ';
       if ((i === player.posy) && (k === player.posx)) {
-        if (player.head === 'top'){
-          kitoltendo[i][k] = '^';}
-        if (player.head === 'left'){
+        if (player.head === 'top' && player.facing === 'right'){
+          kitoltendo[i][k] = '^>';}
+        if (player.head === 'left' && player.facing === 'rigth'){
           kitoltendo[i][k] = '<';}
-        if (player.head === 'right'){
-          kitoltendo[i][k] = '>';}  
+        if (player.head === 'left' && player.facing === 'left'){
+            kitoltendo[i][k] = '<_';}
+        if (player.head === 'right' && player.facing === 'right'){
+          kitoltendo[i][k] = ',>';}
+        if (player.head === 'right' && player.facing === 'left'){
+            kitoltendo[i][k] = '^>';}
+        if (player.head === 'top' && player.facing === 'left'){
+            kitoltendo[i][k] = '<^';}    
         }
       for (let l = 0; l < boxstuff.length; l++) {
         if (i === boxstuff[l].posy && k === boxstuff[l].posx) {
