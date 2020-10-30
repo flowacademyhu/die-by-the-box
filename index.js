@@ -81,10 +81,7 @@ stdin.on('data', (key) => {
     moves.move_a(player, tomb_ami_a_map)
   }
   if (key === 'd') {
-    if (player.posx !== szelesseg - 1) {
-      // ne spammeljunk
-      player.posx++;
-    }
+    moves.move_d(player, tomb_ami_a_map)
   }
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
