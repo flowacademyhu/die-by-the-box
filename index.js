@@ -70,12 +70,12 @@ torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
 if (szamolos === szelesseg) {
   boxmany = boxes.alsotTorol(boxmany, torlendo);
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+
 }
 
-console.log(szamolos)
-console.log(torlendo)
 
 // map.drawMap(tomb_ami_a_map);
+console.clear()
 console.log(tomb_ami_a_map);
 counter = counter + 1
 }, 300);
