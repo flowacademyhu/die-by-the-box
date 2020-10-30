@@ -15,8 +15,6 @@ let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
 let counter = 0;
-let szamolos = 0;
-let torlendo = []
 
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
 
@@ -62,20 +60,7 @@ boxes_new = boxes.spawnBoxes(2, szelesseg)
   counter = 0;
 }
 //regi tomb az uj elemekkel kibővítve
-//megnezzuk mennyi van aluk
-szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
-torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
-//toroljuk ha eleri a szelesseget
-
-if (szamolos === szelesseg) {
-  boxmany = boxes.alsotTorol(boxmany, torlendo);
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
-
-}
-
-
 // map.drawMap(tomb_ami_a_map);
-console.clear()
 console.log(tomb_ami_a_map);
 counter = counter + 1
 }, 300);
@@ -144,41 +129,33 @@ if (key === 'a') {
 }
 }
 if (key === 'd') {
-  //nem a szélén van
-  if (player.posx !== szelesseg-1) {
-    //dobozbqa akar szaladni balról
-          if (tomb_ami_a_map[player.posy][player.posx+1] === 'B' && player.head === 'top'){
-            //ráfordul_bal_also
-          player.head = 'left';
-          player.facing = 'right';
-          }
-          else if (tomb_ami_a_map[player.posy][player.posx+1] === 'B' && player.head === 'left'){
-          //rávanfordulva, lehet mászni
-          //kell-e maszni, v sarkon van
-          //masznikell, felfele
-            if (tomb_ami_a_map[player.posy-1][player.posx+1] === 'B' && tomb_ami_a_map[player.posy][player.posx+1] === 'B' && player.head === 'left' && tomb_ami_a_map[player.posy-1][player.posx] === ' ' ){
-              player.posy--
-            }
-            //sarkon van felfele_balfelso
-            else if (tomb_ami_a_map[player.posy - 1][player.posx + 1] === ' ' && player.head === 'left' && player.facing === 'right'){
-            player.head = 'top';
-            player.posy--;
-            player.posx++ ;
-          }}
-
-          //sarkon van, lefele, jobbfelso
-          else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx + 1] === ' ' && player.head === 'top' && tomb_ami_a_map[player.posy+1][player.posx] === 'B' ){
-          player.head = 'right';
-          player.posy++;
-          player.posx++;
-          }
-
-          //jobblentfordul
-          else if (player.head === 'right' && (tomb_ami_a_map[player.posy+1] === undefined || tomb_ami_a_map[player.posy+1][player.posx] === 'B')) {
+  // nem a szélén van
+    if (player.posx !== szelesseg - 1) {
+    // dobozbqa akar szaladni balról
+      if (tomb_ami_a_map[player.posy][player.posx + 1] === 'B' && player.head === 'top') {
+        // ráfordul_bal_also
+        player.head = 'left';
+        player.facing = 'right';
+      } else if (tomb_ami_a_map[player.posy][player.posx + 1] === 'B' && player.head === 'left') {
+        // rávanfordulva, lehet mászni
+        // kell-e maszni, v sarkon van
+        // masznikell, felfele
+        if (tomb_ami_a_map[player.posy - 1][player.posx + 1] === 'B' && tomb_ami_a_map[player.posy][player.posx + 1] === 'B' && player.head === 'left' && tomb_ami_a_map[player.posy - 1][player.posx] === ' ') {
+          player.posy--;
+        }
+        // sarkon van felfele_balfelso
+        else if (tomb_ami_a_map[player.posy - 1][player.posx + 1] === ' ' && player.head === 'left' && player.facing === 'right') {
           player.head = 'top';
-          player.facing = 'right';
-          }
-
+          player.posy--;
+          player.posx++;
+        }
+      }
+      // sarkon van, lefele, jobbfelso
+      else if (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx + 1] === ' ' && player.head === 'top' && tomb_ami_a_map[player.posy + 1][player.posx] === 'B') {
+        player.head = 'right';
+        player.posy++;
+        player.posx++;
+      }
           // maszni kell lefele
           else if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === ' ' && player.head === 'right' && (tomb_ami_a_map[player.posy+1][player.posx-1] === 'B' || tomb_ami_a_map[player.posy+1][player.posx+1] === undefined) ){
                 player.posy++}
@@ -186,19 +163,19 @@ if (key === 'd') {
           else if (tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === 'B' || (tomb_ami_a_map[player.posy+1][player.posx] === ' ' && player.posy+ 1 === magassag -1 )) && player.head === 'right'){
             player.head === 'top';
           }
-    else {player.posx++ }
+    else {player.posx++
+          player.facing = 'right'}
     // nincs spam
 }
   else if (player.head === 'left' && player.posx === 0) {
   if (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy+1][player.posx] === ' ') {
-    player.posy++
+    player.posy++}
   if (player.posx !== szelesseg-1) {
     // ne spammeljunk
-  player.posx++;}
+  player.posy++;}
   }
-  else {player.head = 'top'}
 }
-}
+
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
   console.log(tomb_ami_a_map);
