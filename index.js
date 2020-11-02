@@ -4,7 +4,7 @@ const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
-const addtopscore = require('./topscores.js');
+const addtopscore = require('./topscores.json');
 const falling = require('./falling.js')
 
 let topscores = addtopscore.topscores;
@@ -17,7 +17,7 @@ let scoremany = []
 let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:2, name:'Tesztelek' };
 let boxmany = []
 //alap doboz spawn
-boxmany = boxes.spawnBoxes(2, szelesseg);
+boxmany = boxes.spawnBoxes(boxes.diffSum(player.points), szelesseg);
 //alap score spawn
 scoremany = boxes.spawnBoxes(2, szelesseg);
 let counter_doboz = 0;
@@ -53,10 +53,13 @@ setInterval(() => {
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   //map kitoltve
   //uj boxok spawnoltatasa és elheylezése időzítve!!!! counter 0zasa
-  if (counter_doboz === magassag - 1) {
-    boxmany = boxes.spawnInterval(boxmany, 2, szelesseg);
+  if (player.points >= 25 && counter_doboz === 8) {
+    boxmany = boxes.spawnInterval(boxmany, boxes.diffSum(player.points), szelesseg);
     counter_doboz = 0;
-  }
+  } else if (counter_doboz === magassag - 1) {
+    boxmany = boxes.spawnInterval(boxmany, boxes.diffSum(player.points), szelesseg);
+    counter_doboz = 0;
+  };
   //regi tomb az uj elemekkel kibővítve
   //jutalom spawnoltatás, időzétés
   if (counter_jutalom === (magassag - 1) *2 ) {
@@ -78,7 +81,6 @@ setInterval(() => {
   counter_jutalom = counter_jutalom +1;
   isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
-
 //regi tomb az uj elemekkel kibővítve
 
 //Karakter mozgás

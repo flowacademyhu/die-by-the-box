@@ -118,6 +118,21 @@ const ScorePlayer = (scoreTomb, jatekos) => {
 }
 
 
+const diffSum = (pontok) => {
+    let boxSum = 0;
+    if (pontok > 20) {
+      boxSum = Math.floor(Math.random() * (9 - 5) + 5);
+    } else if (pontok >= 15) {
+      boxSum = Math.floor(Math.random() * (6 - 4) + 4);
+    } else if (pontok >= 10) {
+      boxSum = Math.floor(Math.random() * (5 - 3) + 3);
+    } else if (pontok >= 5) {
+      boxSum = Math.floor(Math.random() * (4 - 2) + 2);
+    } else {
+      boxSum = Math.floor(Math.random() * (3 - 1) + 1);
+    }
+    return boxSum;
+  };
 
 module.exports = {
     spawnBoxes,
@@ -126,5 +141,6 @@ module.exports = {
     alsotTorol,
     spawnInterval,
     ScoreTorlesScore,
-    ScorePlayer
+    ScorePlayer,
+    diffSum
 };
