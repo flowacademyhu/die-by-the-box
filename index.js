@@ -7,14 +7,14 @@ const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
 const falling = require('./falling.js')
 
-
+let topscores = addtopscore.topscores;
 let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:0, name:'' };
 let scoremany = []
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:2, name:'Tesztelek' };
 let boxmany = []
 //alap doboz spawn
 boxmany = boxes.spawnBoxes(2, szelesseg);
@@ -102,3 +102,5 @@ stdin.on('data', (key) => {
     process.exit(0);
   }
 });
+
+
