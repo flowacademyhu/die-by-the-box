@@ -5,88 +5,78 @@ const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
-const difficulty = require('./test');
+const falling = require('./falling.js')
 
-
+let topscores = addtopscore.topscores;
 let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 8, lives:0, name:'' };
+let scoremany = []
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 25, lives:2, name:'Tesztelek' };
 let boxmany = []
-boxmany = boxes.spawnBoxes(difficulty.diffSum(player.points), szelesseg);
-let boxes_new = []
-let counter = 0;
+//alap doboz spawn
+boxmany = boxes.spawnBoxes(boxes.diffSum(player.points), szelesseg);
+//alap score spawn
+scoremany = boxes.spawnBoxes(2, szelesseg);
+let counter_doboz = 0;
+let counter_jutalom = 0;
 let szamolos = 0;
 let torlendo = []
 let kellEsni = false;
 let isDead = false;
 
-tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
+tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany)
 
 setInterval(() => {
   if (isDead) {
     process.exit(0);
   }
-  //boxok mozgatasa
-  let vaneures = 0;
-  for (let z = 0; z < boxmany.length; z++) {
-    vaneures = 0;
-    //if ciklus h utolso sor
-    if (boxmany[z].posy !== magassag - 1) {
-      //mapellenorzes h van-e alatta hely
-      for (let t = 0; t < tomb_ami_a_map.length; t++) {
-        for (let o = 0; o < tomb_ami_a_map[t].length; o++) {
-          //körbejártuk a tombot^
-          if (boxmany[z].posy === t && boxmany[z].posx === o) {
-            //van e a tomb adott pontjan doboz^
-            for (let w = t; w < tomb_ami_a_map.length; w++) {
-              if (tomb_ami_a_map[w][o] !== 'B') {
-                //van-e alatta hely^
-                vaneures = vaneures + 1;
-              }
-            }
-          }
-        }
-      }
-      //for cikluson kívül mert nem minden üresre akarunk mozgatni, ha tobb mint egy üres van akk megy egyet le
-      if (vaneures > 0) {
-        boxmany[z].posy++;
-      }
-    }
+  // box eses
+  boxmany = falling.falling(boxmany, tomb_ami_a_map);
+  // score eses
+  scoremany = falling.falling(scoremany, tomb_ami_a_map);
+  // score torles
+  
+  if (player.posy !== magassag-1 && player.head === 'top' && (tomb_ami_a_map[player.posy+1][player.posx] === ' ' || tomb_ami_a_map[player.posy+1][player.posx] === '$'  )) {
+    kellEsni = true
+  }
+  if (kellEsni) {
+    player.posy++;
+    kellEsni = false;
   }
   //boxok mozgatva
   //map kitoltes
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   //map kitoltve
   //uj boxok spawnoltatasa és elheylezése időzítve!!!! counter 0zasa
-  if (counter === magassag -1) {
-    boxes_new = []
-    boxes_new = boxes.spawnBoxes(difficulty.diffSum(player.points), szelesseg)
-    for (let d = 0; d < boxes_new.length; d++) {
-      boxmany.push(boxes_new[d])
-    }
-    counter = 0;
-  }
+  if (player.points >= 25 && counter_doboz === 8) {
+    boxmany = boxes.spawnInterval(boxmany, boxes.diffSum(player.points), szelesseg);
+    counter_doboz = 0;
+  } else if (counter_doboz === magassag - 1) {
+    boxmany = boxes.spawnInterval(boxmany, boxes.diffSum(player.points), szelesseg);
+    counter_doboz = 0;
+  };
   //regi tomb az uj elemekkel kibővítve
+  //jutalom spawnoltatás, időzétés
+  if (counter_jutalom === (magassag - 1) *2 ) {
+    scoremany = boxes.spawnInterval(scoremany, 2, szelesseg);
+    counter_jutalom = 0;
+  }
   //megnezzuk mennyi van aluk
   szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
   torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
   //toroljuk ha eleri a szelesseget
-
   if (szamolos === szelesseg) {
     boxmany = boxes.alsotTorol(boxmany, torlendo);
-    tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+    tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
     kellEsni = true;
-    if (kellEsni) {
-      player.posy++;
-      kellEsni = false;
-    }
   };
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
-  counter = counter + 1;
+  counter_doboz = counter_doboz + 1;
+  counter_jutalom = counter_jutalom +1;
   isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
 //regi tomb az uj elemekkel kibővítve
@@ -106,7 +96,7 @@ stdin.on('data', (key) => {
     moves.move_d(player, tomb_ami_a_map)
   }
   console.clear();
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   console.log(tomb_ami_a_map);
   //lehetnyomni
   if (key === 'q') {
@@ -114,3 +104,5 @@ stdin.on('data', (key) => {
     process.exit(0);
   }
 });
+
+
