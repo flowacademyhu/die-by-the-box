@@ -82,6 +82,10 @@ const move_a = (player, tomb_ami_a_map) => {
       player.head = 'top';
       player.facing = 'left';
     }
+    else if ( fejeJobbraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+      player.facing = 'left'
+      player.head = 'top'
+    }
     // nincs spam
   }
   else if (fejeBalraAll(allasa) && Horizontalis === 0) {
@@ -152,6 +156,10 @@ const move_d = (player, tomb_ami_a_map) => {
     }
     else if (egyenesenAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
       player.posx++
+      player.facing = 'right'
+      player.head = 'top'
+    }
+    else if ( fejeBalraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
       player.facing = 'right'
       player.head = 'top'
     }
