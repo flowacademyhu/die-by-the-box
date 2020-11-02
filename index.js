@@ -6,13 +6,12 @@ const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
 
-
+let topscores = addtopscore.topscores;
 let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
-
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:0, name:'' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:0, name:'Tesztelek' };
 let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
@@ -86,7 +85,7 @@ setInterval(() => {
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
   counter = counter + 1;
-  isDead = moves.playerDeath(boxmany, player, isDead);
+  isDead = moves.playerDeath(boxmany, player, isDead, topscores);
 }, 300);
 
 //regi tomb az uj elemekkel kibővítve
@@ -117,3 +116,5 @@ stdin.on('data', (key) => {
     process.exit(0);
   }
 });
+
+
