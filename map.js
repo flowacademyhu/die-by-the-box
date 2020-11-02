@@ -53,17 +53,18 @@ const drawMap = (map) => {
 };
 
 const addTopScore = () => {
-  for ( i = 0, i < addtopscore.length, i++) {
+  for ( i = 0; i < addtopscore.length; i++) {
   if (player.points > addtopscore[i].points) {
     addtopscore.points = player.points;
     addtopscore.name = player.name;
     break
   }
 }
+}
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
-    drawMap
+    drawMap,
     addTopScore
   };
