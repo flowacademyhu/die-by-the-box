@@ -4,7 +4,7 @@ const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
-const addtopscore = require('./topscores.json');
+const addtopscore = require('./topscores.js');
 
 
 let canPushKey = 0
@@ -18,7 +18,7 @@ boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
 let counter = 0;
 
-tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, score)
+tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
 
 setInterval(() => {
   //boxok mozgatasa
@@ -85,7 +85,7 @@ stdin.on('data', (key) => {
     moves.move_d(player, tomb_ami_a_map)
   }
   console.clear();
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, score);
+  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
   console.log(tomb_ami_a_map);
   //lehetnyomni
   if (key === 'q') {
