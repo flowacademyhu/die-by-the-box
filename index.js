@@ -17,6 +17,10 @@ let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
 let counter = 0;
+let szamolos = 0;
+let torlendo = []
+let kellEsni = false;
+let isDead = false;
 
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
 
@@ -34,7 +38,7 @@ setInterval(() => {
           if (boxmany[z].posy === t && boxmany[z].posx === o) {
             //van e a tomb adott pontjan doboz^
             for (let w = t; w < tomb_ami_a_map.length; w++) {
-              if (tomb_ami_a_map[w][o] === ' ' || tomb_ami_a_map[w][o] === 'P') {
+              if (tomb_ami_a_map[w][o] !== 'B') {
                 //van-e alatta hely^
                 vaneures = vaneures + 1;
               }
@@ -62,10 +66,24 @@ setInterval(() => {
     counter = 0;
   }
   //regi tomb az uj elemekkel kibővítve
+  //megnezzuk mennyi van aluk
+  szamolos = boxes.alsotSzamolSzam(boxmany, magassag);
+  torlendo = boxes.alsotSzamolTomb(boxmany, magassag);
+  //toroljuk ha eleri a szelesseget
+
+  if (szamolos === szelesseg) {
+    boxmany = boxes.alsotTorol(boxmany, torlendo);
+    tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+    kellEsni = true;
+    if (kellEsni) {
+      player.posy++;
+      kellEsni = false;
+    }
+  };
   // map.drawMap(tomb_ami_a_map);
-  console.clear()
   console.log(tomb_ami_a_map);
-  counter = counter + 1
+  counter = counter + 1;
+  isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
 
 //regi tomb az uj elemekkel kibővítve
@@ -78,6 +96,9 @@ stdin.resume();
 stdin.setEncoding('utf8');
 stdin.on('data', (key) => {
   // spamszamlalo
+  if (isDead === true) {
+    process.exit(0);
+  }
   if (key === 'a') {
     moves.move_a(player, tomb_ami_a_map)
   }
