@@ -208,7 +208,6 @@ const playerDeath = (dobozok, jatekos, allapot) => {
 };
 
 
-
 module.exports = {
   move_a,
   move_d,
