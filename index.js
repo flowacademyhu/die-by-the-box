@@ -3,12 +3,8 @@ const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
-<<<<<<< HEAD
-const test = require('./test');
-=======
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
->>>>>>> 3dfbf2119dc3bbee51ae8d53b95e02a473a0b3e2
 
 
 let canPushKey = 0
@@ -87,8 +83,7 @@ setInterval(() => {
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
   counter = counter + 1;
-  isDead = test.playerDeath(boxmany, player, isDead);
-  console.log(isDead);
+  isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
 
 //regi tomb az uj elemekkel kibővítve
@@ -101,6 +96,9 @@ stdin.resume();
 stdin.setEncoding('utf8');
 stdin.on('data', (key) => {
   // spamszamlalo
+  if (isDead === true) {
+    process.exit(0);
+  }
   if (key === 'a') {
     moves.move_a(player, tomb_ami_a_map)
   }
@@ -113,9 +111,6 @@ stdin.on('data', (key) => {
   //lehetnyomni
   if (key === 'q') {
     console.log('Quitter! You might as well quit life too!!!')
-    process.exit(0);
-  }
-  if (isDead) {
     process.exit(0);
   }
 });
