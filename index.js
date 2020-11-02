@@ -4,7 +4,7 @@ const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
-const addtopscore = require('./topscores.js');
+const addtopscore = require('./topscores.json');
 const falling = require('./falling.js')
 
 let topscores = addtopscore.topscores;
