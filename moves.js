@@ -8,8 +8,13 @@ const ezDoboz = (cella) => {
   }
   else {return false}
 }
-const ezUres = (cella) => {
-  return cella === ' ';
+const ezUresVPenz = (cella) => {
+  if (cella === '$') {
+    return cella
+  }
+  else if (cella === ' ') {
+    return cella
+  }
 }
 const ezLetezik = (kerdeses) => {
   return kerdeses !== undefined;
@@ -45,13 +50,13 @@ const move_a = (player, tomb_ami_a_map) => {
       //rávanfordulva, lehet mászni
       //kell-e maszni, v sarkon van
       //masznikell, felfele
-      if (ezDoboz(toleBalraFel) && ezDoboz(toleBalra) && fejeJobbraAll(allasa) && ezUres(felette)) {
+      if (ezDoboz(toleBalraFel) && ezDoboz(toleBalra) && fejeJobbraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--
         player.head = 'right';
         player.facing = 'left';
       }
       //sarkon van felfele_jobbfelso
-      else if (ezUres(toleBalraFel) && fejeJobbraAll(allasa)) {
+      else if (ezUresVPenz(toleBalraFel) && fejeJobbraAll(allasa)) {
         player.facing = 'left'
         player.head = 'top';
         player.posy--;
@@ -59,7 +64,7 @@ const move_a = (player, tomb_ami_a_map) => {
       }
     }
     //sarkon van, lefele, balfelso
-    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUres(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1]) && egyenesenAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
+    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1]) && egyenesenAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
       player.facing = 'left'
       player.head = 'left';
       player.posy++;
@@ -71,7 +76,7 @@ const move_a = (player, tomb_ami_a_map) => {
       player.facing = 'left';
     }
     // maszni kell lefele
-    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUres(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && fejeBalraAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis + 1])) {
+    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && fejeBalraAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis + 1])) {
       player.posy++
       player.head = 'left'
       player.facing = 'left'
@@ -93,7 +98,7 @@ const move_a = (player, tomb_ami_a_map) => {
     // nincs spam
   }
   else if (fejeBalraAll(allasa) && Horizontalis === 0) {
-    if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUres(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
+    if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
       player.posy++
       player.facing = 'left';
       player.head = 'left'
@@ -123,13 +128,13 @@ const move_d = (player, tomb_ami_a_map) => {
       // rávanfordulva, lehet mászni
       // kell-e maszni, v sarkon van
       // masznikell, felfele
-      if (ezDoboz(toleJobbraFel) && ezDoboz(toleJobbra) && fejeBalraAll(allasa) && ezUres(felette)) {
+      if (ezDoboz(toleJobbraFel) && ezDoboz(toleJobbra) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--;
         player.head = 'left';
         player.facing = 'right'
       }
       // sarkon van felfele_balfelso
-      else if (ezUres(toleJobbraFel) && fejeBalraAll(allasa)) {
+      else if (ezUresVPenz(toleJobbraFel) && fejeBalraAll(allasa)) {
         player.facing = 'right';
         player.head = 'top';
         player.posy--;
@@ -137,7 +142,7 @@ const move_d = (player, tomb_ami_a_map) => {
       }
     }
     // sarkon van, lefele, jobbfelso
-    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUres(tomb_ami_a_map[Vertikalis + 1][Horizontalis + 1]) && egyenesenAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
+    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis + 1][Horizontalis + 1]) && egyenesenAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])) {
       player.facing = 'right';
       player.head = 'right';
       player.posy++;
@@ -149,7 +154,7 @@ const move_d = (player, tomb_ami_a_map) => {
           player.facing = 'right';
     }
     // maszni kell lefele
-    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUres(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && fejeJobbraAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1])) {
+    else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && fejeJobbraAll(allasa) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1])) {
       player.posy++
       player.facing = 'right';
       player.head = 'right';
@@ -170,7 +175,7 @@ const move_d = (player, tomb_ami_a_map) => {
     // nincs spam
   }
   else if (fejeJobbraAll(allasa) && player.posx === mapVege) {
-    if (ezLetezik(tomb_ami_a_map[player.posy + 1]) && ezUres(tomb_ami_a_map[player.posy + 1][player.posx])) {
+    if (ezLetezik(tomb_ami_a_map[player.posy + 1]) && ezUresVPenz(tomb_ami_a_map[player.posy + 1][player.posx])) {
       player.posy++
       player.facing = 'right';
       player.head = 'right';
@@ -203,7 +208,7 @@ module.exports = {
   move_a,
   move_d,
   ezDoboz,
-  ezUres,
+  ezUresVPenz,
   ezLetezik,
   fejeBalraAll,
   fejeJobbraAll,

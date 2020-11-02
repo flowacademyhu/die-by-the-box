@@ -11,10 +11,15 @@ const palyaKeret = (szelesseg, magassag) => {
 };
 
 
-const palyaKitoltes = (kitoltendo, player, boxstuff) => {
+const palyaKitoltes = (kitoltendo, player, boxstuff, scorestuff) => {
   for (let i = 0; i < kitoltendo.length; i++) {
     for (let k = 0; k < kitoltendo[i].length; k++) {
       kitoltendo[i][k] = ' ';
+      for (let l = 0; l < scorestuff.length; l++) {
+        if (i === scorestuff[l].posy && k === scorestuff[l].posx) {
+          kitoltendo[i][k] = '$';
+        }
+      }
       if ((i === player.posy) && (k === player.posx)) {
         if (player.head === 'top' && player.facing === 'right'){
           kitoltendo[i][k] = '^>';}
