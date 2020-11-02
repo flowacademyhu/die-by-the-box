@@ -20,7 +20,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
         if (player.head === 'left' && player.facing === 'right'){
           kitoltendo[i][k] = '<';}
         if (player.head === 'left' && player.facing === 'left'){
-            kitoltendo[i][k] = '<_';}
+            kitoltendo[i][k] = '<˛';}
         if (player.head === 'right' && player.facing === 'right'){
           kitoltendo[i][k] = ',>';}
         if (player.head === 'right' && player.facing === 'left'){
