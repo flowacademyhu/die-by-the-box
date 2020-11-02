@@ -1,3 +1,7 @@
+const map = require('./map.js');
+const addtop = require('./topscores.js');
+
+
 const ezDoboz = (cella) => {
   if (cella === 'B') {
     return true
@@ -82,6 +86,10 @@ const move_a = (player, tomb_ami_a_map) => {
       player.head = 'top';
       player.facing = 'left';
     }
+    else if ( fejeJobbraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+      player.facing = 'left'
+      player.head = 'top'
+    }
     // nincs spam
   }
   else if (fejeBalraAll(allasa) && Horizontalis === 0) {
@@ -155,6 +163,10 @@ const move_d = (player, tomb_ami_a_map) => {
       player.facing = 'right'
       player.head = 'top'
     }
+    else if ( fejeBalraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+      player.facing = 'right'
+      player.head = 'top'
+    }
     // nincs spam
   }
   else if (fejeJobbraAll(allasa) && player.posx === mapVege) {
@@ -171,14 +183,21 @@ const move_d = (player, tomb_ami_a_map) => {
 }
 
 const playerDeath = (dobozok, jatekos, allapot) => {
+  let pointsatdeath = 0;
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx) {
       allapot = true;
+      map.addTopScore(jatekos.points, jatekos.name);
+      //console.clear();
       console.log('You are dead');
+      console.log(jatekos.name);
+      console.log(jatekos.points);
       return allapot;
     }
   }
 };
+
+
 
 module.exports = {
   move_a,
