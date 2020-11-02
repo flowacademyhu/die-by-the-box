@@ -17,7 +17,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
       if ((i === player.posy) && (k === player.posx)) {
         if (player.head === 'top' && player.facing === 'right'){
           kitoltendo[i][k] = '^>';}
-        if (player.head === 'left' && player.facing === 'rigth'){
+        if (player.head === 'left' && player.facing === 'right'){
           kitoltendo[i][k] = '<';}
         if (player.head === 'left' && player.facing === 'left'){
             kitoltendo[i][k] = '<_';}

@@ -3,7 +3,6 @@ const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
-const move = require('./moves.js');
 const moves = require('./moves.js');
 
 
@@ -63,6 +62,7 @@ setInterval(() => {
   }
   //regi tomb az uj elemekkel kibővítve
   // map.drawMap(tomb_ami_a_map);
+  console.clear()
   console.log(tomb_ami_a_map);
   counter = counter + 1
 }, 300);
