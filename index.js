@@ -11,7 +11,7 @@ let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:0, name:'Tesztelek' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:2, name:'Tesztelek' };
 let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
@@ -85,7 +85,7 @@ setInterval(() => {
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
   counter = counter + 1;
-  isDead = moves.playerDeath(boxmany, player, isDead, topscores);
+  isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
 
 //regi tomb az uj elemekkel kibővítve

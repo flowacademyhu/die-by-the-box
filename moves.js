@@ -182,10 +182,10 @@ const move_d = (player, tomb_ami_a_map) => {
   }
 }
 
-const playerDeath = (dobozok, jatekos, allapot, topscores) => {
-  let pointsatdeath = 0;
+const playerDeath = (dobozok, jatekos, allapot) => {
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx) {
+      if (jatekos.lives === 0) {
       allapot = true;
       map.addTopScore(jatekos.points, jatekos.name);
       //console.clear();
@@ -194,6 +194,10 @@ const playerDeath = (dobozok, jatekos, allapot, topscores) => {
       console.log(jatekos.points);
       //console.log(topscores);
       return allapot;
+    }   else 
+        {
+        jatekos.lives--;
+        }
     }
   }
 };
