@@ -52,6 +52,13 @@ setInterval(() => {
       }
     }
   }
+  if (player.posy !== magassag-1 && player.head === 'top'&& tomb_ami_a_map[player.posy+1][player.posx] === ' ') {
+    kellEsni = true
+  }
+  if (kellEsni) {
+    player.posy++;
+    kellEsni = false;
+  }
   //boxok mozgatva
   //map kitoltes
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
@@ -75,10 +82,6 @@ setInterval(() => {
     boxmany = boxes.alsotTorol(boxmany, torlendo);
     tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
     kellEsni = true;
-    if (kellEsni) {
-      player.posy++;
-      kellEsni = false;
-    }
   };
   // map.drawMap(tomb_ami_a_map);
   console.log(tomb_ami_a_map);
