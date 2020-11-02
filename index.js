@@ -5,6 +5,7 @@ const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
+const difficulty = require('./test');
 
 
 let canPushKey = 0
@@ -12,9 +13,9 @@ let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:0, name:'' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 8, lives:0, name:'' };
 let boxmany = []
-boxmany = boxes.spawnBoxes(2, szelesseg);
+boxmany = boxes.spawnBoxes(difficulty.diffSum(player.points), szelesseg);
 let boxes_new = []
 let counter = 0;
 let szamolos = 0;
@@ -25,6 +26,9 @@ let isDead = false;
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
 
 setInterval(() => {
+  if (isDead) {
+    process.exit(0);
+  }
   //boxok mozgatasa
   let vaneures = 0;
   for (let z = 0; z < boxmany.length; z++) {
@@ -57,9 +61,9 @@ setInterval(() => {
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
   //map kitoltve
   //uj boxok spawnoltatasa és elheylezése időzítve!!!! counter 0zasa
-  if (counter === magassag - 1) {
+  if (counter === magassag -1) {
     boxes_new = []
-    boxes_new = boxes.spawnBoxes(2, szelesseg)
+    boxes_new = boxes.spawnBoxes(difficulty.diffSum(player.points), szelesseg)
     for (let d = 0; d < boxes_new.length; d++) {
       boxmany.push(boxes_new[d])
     }
@@ -85,7 +89,6 @@ setInterval(() => {
   counter = counter + 1;
   isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
-
 //regi tomb az uj elemekkel kibővítve
 
 //Karakter mozgás
@@ -96,9 +99,6 @@ stdin.resume();
 stdin.setEncoding('utf8');
 stdin.on('data', (key) => {
   // spamszamlalo
-  if (isDead === true) {
-    process.exit(0);
-  }
   if (key === 'a') {
     moves.move_a(player, tomb_ami_a_map)
   }

@@ -167,6 +167,18 @@ const move_d = (player, tomb_ami_a_map) => {
   }
 }
 
+const playerDeath = (dobozok, jatekos, allapot) => {
+  for (let i = 0; i < dobozok.length; i++) {
+    if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx) {
+      allapot = true;
+      console.clear();
+      console.log('You are dead');
+      return allapot;
+    }
+  }
+};
+
+
 module.exports = {
   move_a,
   move_d,
@@ -176,4 +188,5 @@ module.exports = {
   fejeBalraAll,
   fejeJobbraAll,
   egyenesenAll,
+  playerDeath
 }
