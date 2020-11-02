@@ -1,29 +1,28 @@
-const { table, getBorderCharacters } = require('table');
+const table = require('table');
 const axel = require('axel');
-const addtopscore = require('./topscores.js');
-const { draw } = require('axel');
-
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
   for (let i = 0; i < hasznalttomb.length; i++) {
     hasznalttomb[i] = new Array(szelesseg);
+    for (let j = 0; j < szelesseg; j++) {
+    if (i === 0 || j === 0 || i === magassag - 1 || j === szelesseg - 1) {
+      hasznalttomb[i][j] = '██';
+  }
+  }
   }
   return hasznalttomb;
 };
-
-
 const palyaKitoltes = (kitoltendo, player, boxstuff) => {
   for (let i = 0; i < kitoltendo.length; i++) {
     for (let k = 0; k < kitoltendo[i].length; k++) {
-      if (i === 0 || k === 0 || i === kitoltendo - 1 || k === kitoltendo - 1) {
-        kitoltendo[i][k] = '██';
+      kitoltendo[i][k] = ' ';
       if ((i === player.posy) && (k === player.posx)) {
         if (player.head === 'top' && player.facing === 'right'){
-          kitoltendo[i][k] = '^>';}
+          kitoltendo[i][k] = '';}
         if (player.head === 'left' && player.facing === 'right'){
           kitoltendo[i][k] = '<';}
         if (player.head === 'left' && player.facing === 'left'){
-            kitoltendo[i][k] = '<˛';}
+            kitoltendo[i][k] = '<_';}
         if (player.head === 'right' && player.facing === 'right'){
           kitoltendo[i][k] = ',>';}
         if (player.head === 'right' && player.facing === 'left'){
@@ -38,37 +37,21 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
       }
     }
   }
-}
+  kitoltendo[0][0] = '🎖️';
+  kitoltendo[0][1] = player.points;
+  kitoltendo[0][8] = '❤️';
+  kitoltendo[0][9] = player.lives;
+  console.clear();
   return kitoltendo;
 };
-
-
-const drawMap = (palyaKeret) => {
-  const text = table.table(palyaKeret, {
-    border: getBorderCharacters('void'),
-    columnDefault: {
-      paddingLeft: 0,
-      paddingRight: 0
-    }
-  });
-  console.clear();
+const drawMap = (map) => {
   console.log('Points:', player.points, 'Lives:', player.elet);
+  const text = table.table(map);
+  console.clear();
   console.log(text);
 };
-
-const addTopScore = () => {
-  for ( i = 0; i < addtopscore.length; i++) {
-  if (player.points > addtopscore[i].points) {
-    addtopscore.points = player.points;
-    addtopscore.name = player.name;
-    break
-  }
-}
-};
-
 module.exports = {
     palyaKeret,
     palyaKitoltes,
-    drawMap,
-    addTopScore
+    drawMap
   };
