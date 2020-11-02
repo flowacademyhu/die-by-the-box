@@ -193,7 +193,7 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       if (jatekos.lives === 0) {
       allapot = true;
       map.addTopScore(jatekos.points, jatekos.name);
-      //console.clear();
+      console.clear();
       console.log('You are dead');
       console.log(jatekos.name);
       console.log(jatekos.points);

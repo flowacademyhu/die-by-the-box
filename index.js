@@ -30,6 +30,9 @@ let isDead = false;
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany)
 
 setInterval(() => {
+  if (isDead) {
+    process.exit(0);
+  }
   // box eses
   boxmany = falling.falling(boxmany, tomb_ami_a_map);
   // score eses
@@ -84,9 +87,6 @@ stdin.resume();
 stdin.setEncoding('utf8');
 stdin.on('data', (key) => {
   // spamszamlalo
-  if (isDead === true) {
-    process.exit(0);
-  }
   if (key === 'a') {
     moves.move_a(player, tomb_ami_a_map)
   }
