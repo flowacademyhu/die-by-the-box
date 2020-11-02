@@ -1,6 +1,7 @@
 const table = require('table');
 const axel = require('axel');
-const topscores = require('./topscores.js');
+const topscores = require('./topscores.json');
+const fs = require('fs');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -58,13 +59,30 @@ const drawMap = (map) => {
 };
 
 const addTopScore = (pointscollected, player) => {
-  for ( i = 0; i < topscores.length; i++ ) {
-  if (pointscollected > topscores[i].points) {
-    topscores[i].points = player.points;
-    topscores[i].name = player.name;
-    break
-  }
-} 
+  fs.readFile('./topscores.json', 'utf8', (err, data) => {
+
+    if (err) {
+        console.log(`Error reading file from disk: ${err}`);
+    } else {
+
+        // parse JSON string to JSON object
+        const databases = JSON.parse(data);
+
+        // add a new record
+        databases.push({
+            name: player,
+            points: pointscollected
+        });
+
+        // write new data back to the file
+        fs.writeFile('./topscores.json', JSON.stringify(databases, null, 4), (err) => {
+            if (err) {
+                console.log(`Error writing file: ${err}`);
+            }
+        });
+    }
+
+})
 };
 
 module.exports = {
