@@ -1,5 +1,6 @@
 const table = require('table');
 const axel = require('axel');
+const addtopscore = require('./topscores.js');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -17,7 +18,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
       if ((i === player.posy) && (k === player.posx)) {
         if (player.head === 'top' && player.facing === 'right'){
           kitoltendo[i][k] = '^>';}
-        if (player.head === 'left' && player.facing === 'rigth'){
+        if (player.head === 'left' && player.facing === 'right'){
           kitoltendo[i][k] = '<';}
         if (player.head === 'left' && player.facing === 'left'){
             kitoltendo[i][k] = '<_';}
@@ -51,20 +52,18 @@ const drawMap = (map) => {
   console.log(text);
 };
 
-const savePointAfterDeath = (playername, collectedpoints) => {
-  for (i = 0, i < topscores.length, i++) {
-    if topscores.ID < player.points {
-      topscores.name = player.name;
-      topscores.points = player.points;
-      break;
-    }
+const addTopScore = () => {
+  for ( i = 0, i < addtopscore.length, i++) {
+  if (player.points > addtopscore[i].points) {
+    addtopscore.points = player.points;
+    addtopscore.name = player.name;
+    break
   }
-  };
-
+}
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
     drawMap
-    savePointAfterDeath
+    addTopScore
   };
