@@ -1,5 +1,6 @@
 const table = require('table');
 const axel = require('axel');
+const addtopscore = require('./topscores.js');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -51,8 +52,18 @@ const drawMap = (map) => {
   console.log(text);
 };
 
+const addTopScore = () => {
+  for ( i = 0, i < addtopscore.length, i++)
+  if (player.points > addtopscore[i].points) {
+    addtopscore.points = player.points;
+    addtopscore.name = player.name;
+    break
+  }
+}
+
 module.exports = {
     palyaKeret,
     palyaKitoltes,
     drawMap
+    addTopScore
   };
