@@ -37,8 +37,8 @@ const palyaKitoltes = (kitoltendo, player, boxstuff) => {
   }
   kitoltendo[0][0] = '🎖️';
   kitoltendo[0][1] = player.points;
-  kitoltendo[0][5] = '❤️';
-  kitoltendo[0][6] = player.lives;
+  kitoltendo[0][8] = '❤️';
+  kitoltendo[0][9] = player.lives;
   console.clear();
   return kitoltendo;
 };
