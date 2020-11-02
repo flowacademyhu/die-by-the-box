@@ -1,4 +1,5 @@
 const map = require("./map");
+const { playerDeath } = require("./moves");
 
 const spawnBoxes = (boxNum, szelesseg) => {
     let boxTomb = []
@@ -75,10 +76,55 @@ const alsotTorol = (boxok, torlos) => {
      return eredmeny
 }
 
+
+const ScoreTorlesScore = (scoreTomb, jatekos, dobozok) => {
+    let eredmeny = []
+    let talalatok = 0;
+    for (let l = 0; l < scoreTomb.length; l++) {
+        talalatok = 0;
+        //nem player?
+        if (scoreTomb[l].posy === jatekos.posy && scoreTomb[l].posx === jatekos.posx) {
+        //player eseten semmi
+        talalatok = talalatok + 3
+        }
+        //nem doboz?
+        for (let n = 0; n < dobozok.length; n++) {
+            if (dobozok[n].posy === scoreTomb[l].posy && dobozok[n].posx === scoreTomb[l].posx) {
+                talalatok = talalatok + 8
+            }
+            }
+            //doboz eseten semmi 
+        for (let m = 0; m < scoreTomb.length; m++) {
+        if (scoreTomb[l].posy === scoreTomb[m].posy && scoreTomb[l].posx === scoreTomb[m].posx) {
+            talalatok = talalatok + 1;
+        }
+     }
+     if (talalatok === 1) {
+        eredmeny.push(scoreTomb[l])
+ }
+}
+     return eredmeny
+}
+
+const ScorePlayer = (scoreTomb, jatekos) => {
+    let talalatok = 0;
+    for (let l = 0; l < scoreTomb.length; l++) {
+        talalatok = 0;
+        if (scoreTomb[l].posy === jatekos.posy && scoreTomb[l].posx === jatekos.posx) {
+        jatekos.points++
+        }
+}
+     return jatekos.points
+}
+
+
+
 module.exports = {
     spawnBoxes,
     alsotSzamolSzam,
     alsotSzamolTomb,
     alsotTorol,
-    spawnInterval
+    spawnInterval,
+    ScoreTorlesScore,
+    ScorePlayer
 };

@@ -1,4 +1,4 @@
-const falling = (aminek_esnie_kell, palya) => {
+const fallingBox = (aminek_esnie_kell, palya) => {
   // dolgok mozgatasa
   let vaneures = 0;
   for (let z = 0; z < aminek_esnie_kell.length; z++) {
@@ -27,7 +27,31 @@ const falling = (aminek_esnie_kell, palya) => {
   return aminek_esnie_kell;
 };
 
+const fallingScore = (score, dobozok, palya) => {
+  // dolgok mozgatasa
+  let egyezes = 0
+  for (let z = 0; z < score.length; z++) {
+    egyezes = 0
+    // if ciklus h utolso sor
+    if (score[z].posy !== palya.length - 1) {
+      // mapellenorzes h van-e alatta hely
+      for (let t = 0; t < dobozok.length; t++) {
+          // körbejártuk a doboz_tombot^
+          if (score[z].posy+1 === dobozok[t].posy && score[z].posx === dobozok[t].posx) {
+            // van-e alatta doboz^
+            egyezes = egyezes + 1;
+        }
+      }
+        if (egyezes < 1) {
+          score[z].posy = score[z].posy+ 1
+      }
+    }
+  }
+  return score;
+};
+
 module.exports = {
-  falling
+  fallingBox,
+  fallingScore
 }
-;
+  ;

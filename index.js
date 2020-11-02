@@ -14,7 +14,7 @@ let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 
 let scoremany = []
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:2, name:'Tesztelek' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:2, name:'Tesztelek' };
 let boxmany = []
 //alap doboz spawn
 boxmany = boxes.spawnBoxes(2, szelesseg);
@@ -34,11 +34,13 @@ setInterval(() => {
     process.exit(0);
   }
   // box eses
-  boxmany = falling.falling(boxmany, tomb_ami_a_map);
+  boxmany = falling.fallingBox(boxmany, tomb_ami_a_map);
   // score eses
-  scoremany = falling.falling(scoremany, tomb_ami_a_map);
+  scoremany = falling.fallingScore(scoremany, boxmany, tomb_ami_a_map);
   // score torles
-  
+  player.points = boxes.ScorePlayer(scoremany, player)
+  scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
+  //
   if (player.posy !== magassag-1 && player.head === 'top' && (tomb_ami_a_map[player.posy+1][player.posx] === ' ' || tomb_ami_a_map[player.posy+1][player.posx] === '$'  )) {
     kellEsni = true
   }
@@ -93,6 +95,8 @@ stdin.on('data', (key) => {
   if (key === 'd') {
     moves.move_d(player, tomb_ami_a_map)
   }
+  player.points = boxes.ScorePlayer(scoremany, player)
+  scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   console.log(tomb_ami_a_map);
