@@ -1,5 +1,5 @@
 const map = require('./map.js');
-const addtop = require('./topscores.js');
+const addtop = require('./topscores.json');
 
 
 const ezDoboz = (cella) => {
