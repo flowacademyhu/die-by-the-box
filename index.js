@@ -4,6 +4,7 @@ const boxes = require('./boxes');
 const table = require('table');
 const { box } = require('axel');
 const moves = require('./moves.js');
+const addtopscore = require('./topscores.json');
 
 
 let canPushKey = 0
@@ -11,13 +12,13 @@ let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives:0, name:'' };
 let boxmany = []
 boxmany = boxes.spawnBoxes(2, szelesseg);
 let boxes_new = []
 let counter = 0;
 
-tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany)
+tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, score)
 
 setInterval(() => {
   //boxok mozgatasa
@@ -84,7 +85,7 @@ stdin.on('data', (key) => {
     moves.move_d(player, tomb_ami_a_map)
   }
   console.clear();
-  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany);
+  tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, score);
   console.log(tomb_ami_a_map);
   //lehetnyomni
   if (key === 'q') {
