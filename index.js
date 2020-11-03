@@ -16,7 +16,7 @@ let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
 let scoremany = []
-let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives: 2, name: 'Tesztelek' };
+let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 0, lives: 3, name: 'Tesztelek' };
 let boxmany = []
 //alap doboz spawn
 boxmany = boxes.spawnBoxes(boxes.diffSum(player.points), szelesseg);
@@ -58,6 +58,7 @@ rl.on("close", function () {
   console.clear();
 
   setInterval(() => {
+    isDead = moves.playerDeath(boxmany, player, isDead);
     if (isDead) {
       process.exit(0);
     }
@@ -69,10 +70,10 @@ rl.on("close", function () {
     player.points = boxes.ScorePlayer(scoremany, player)
     scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
     //
-    if (player.posy !== magassag - 1 && ((tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy][player.posx - 1] === ' ' && tomb_ami_a_map[player.posy][player.posx + 1] === ' ' && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') || (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === '🎈'))) {
+    if (player.posy !== magassag - 1 && ((tomb_ami_a_map[player.posy + 1] !== undefined && (tomb_ami_a_map[player.posy][player.posx - 1] === ' ' || tomb_ami_a_map[player.posy][player.posx - 1] === undefined ) && (tomb_ami_a_map[player.posy][player.posx + 1] === ' ' || tomb_ami_a_map[player.posy][player.posx + 1] === undefined ) && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') || (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === '🎈'))) {
       kellEsni = true
     }
-    if (kellEsni) {
+    if (kellEsni && player.posy !== magassag -1) {
       player.posy++;
       kellEsni = false;
     }
@@ -200,6 +201,8 @@ term.singleColumnMenu(items, function (error, response) {
       } else {
         // parse JSON string to JSON object
         let allEntries = JSON.parse(data);
+        let ideiglenesTomb = [];
+        let ideiglenesTarolo = [];
         for (let k = 1; k < allEntries.length; k++) {
           let tarolo = allEntries[k];
           let l = k - 1;
@@ -213,9 +216,14 @@ term.singleColumnMenu(items, function (error, response) {
         console.log('');
         console.log('');
         console.log('Match Found!');
+
         for (let z = 0; z < 5; z++) {
-          term.cyan(allEntries[z].name, ' ', allEntries[z].points, '\n')
+        ideiglenesTarolo = []
+        ideiglenesTarolo.push(allEntries[z].name);
+        ideiglenesTarolo.push(allEntries[z].points);
+        ideiglenesTomb.push(ideiglenesTarolo);
         }
+        console.log(table.table(ideiglenesTomb))
         console.log('Press Q to quit.')
         console.log('Press N to begin your journey.')
         const stdin = process.stdin;
@@ -232,8 +240,6 @@ term.singleColumnMenu(items, function (error, response) {
             theGameItself()
           }
         })
-
-
       }
 
     })
