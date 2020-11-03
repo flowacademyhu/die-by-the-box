@@ -103,11 +103,12 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
       console.log(arrForTop[i]);
   }
-  },
+  };
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
     drawMap,
-    addTopScore
+    addTopScore,
+    generateTopScores
   };
