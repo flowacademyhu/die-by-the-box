@@ -85,6 +85,26 @@ const addTopScore = (pointscollected, player) => {
 })
 };
 
+const generateTopScores = (nOfScores) => { //és ki is írja
+  let arrForTop = [];
+  for ( i = 0; i < addtop.length; i++ ) {
+      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
+  };
+  arrForTop.sort(sortFunction); //sorba rendezi a tömböt
+  function sortFunction(a, b) {
+      if (a[0] === b[0]) {
+          return 0;
+      }
+      else {
+          return (a[0] < b[0]) ? -1 : 1;
+      }
+  }
+  // If nOfScores több mint amennyi score van
+  for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
+      console.log(arrForTop[i]);
+  }
+  },
+
 module.exports = {
     palyaKeret,
     palyaKitoltes,

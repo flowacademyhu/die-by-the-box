@@ -41,7 +41,7 @@ setInterval(() => {
   player.points = boxes.ScorePlayer(scoremany, player)
   scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
   //
-  if (player.posy !== magassag-1 && player.head === 'top' && (tomb_ami_a_map[player.posy+1][player.posx] === ' ' || tomb_ami_a_map[player.posy+1][player.posx] === '$'  )) {
+  if (player.posy !== magassag-1 && ((tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy][player.posx-1] === ' ' && tomb_ami_a_map[player.posy][player.posx+1] === ' ' && tomb_ami_a_map[player.posy+1][player.posx] === ' ') || (tomb_ami_a_map[player.posy+1] !== undefined && tomb_ami_a_map[player.posy+1][player.posx] === '$' ) )) {
     kellEsni = true
   }
   if (kellEsni) {
