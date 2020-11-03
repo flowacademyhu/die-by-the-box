@@ -195,7 +195,32 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log(jatekos.name);
       console.log('Your points:', jatekos.points);
       console.log('TOP SCORES:')
-      console.log(table.table(map.generateTopScores(5)));
+      console.log(table.table(map.generateTopScores(5), {
+        border: {
+          topBody: `─`,
+          topJoin: `─`,
+          topLeft: `┌`,
+          topRight: `┐`,
+
+          bottomBody: `─`,
+          bottomJoin: `─`,
+          bottomLeft: `└`,
+          bottomRight: `┘`,
+
+          bodyLeft: `|`,
+          bodyRight: `|`,
+          bodyJoin: ` `,
+
+          joinBody: ` `,
+          joinLeft: `│`,
+          joinRight: `│`,
+          joinJoin: ` `
+        },
+        columnDefault: {
+          paddingLeft: 1,
+          paddingRight: 2
+        }
+      }));
       return allapot;
     }   else 
         {
