@@ -111,11 +111,21 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   return arrForTopN;
   };
 
+  let newRecord = (points, nOfScores) => {
+    let top = generateTopScores(nOfScores);
+    if (points > top[nOfScores-1][0]) {
+      return 'Yaay! Your score is in TOP5 now! \n Congratulations!'
+    } else {
+      return 'Not good, not terrible.' 
+    }
+  }
+
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
     drawMap,
     addTopScore,
-    generateTopScores
+    generateTopScores,
+    newRecord
   };

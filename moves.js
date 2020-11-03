@@ -194,6 +194,7 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log('You are dead');
       console.log(jatekos.name);
       console.log('Your points:', jatekos.points);
+      console.log(map.newRecord(jatekos.points, 5));
       console.log('TOP SCORES:')
       console.log(table.table(map.generateTopScores(5), {
         border: {
@@ -201,16 +202,16 @@ const playerDeath = (dobozok, jatekos, allapot) => {
           topJoin: `─`,
           topLeft: `┌`,
           topRight: `┐`,
-
+          
           bottomBody: `─`,
           bottomJoin: `─`,
           bottomLeft: `└`,
           bottomRight: `┘`,
-
+          
           bodyLeft: `|`,
           bodyRight: `|`,
           bodyJoin: ` `,
-
+          
           joinBody: ` `,
           joinLeft: `│`,
           joinRight: `│`,
@@ -220,7 +221,8 @@ const playerDeath = (dobozok, jatekos, allapot) => {
           paddingLeft: 1,
           paddingRight: 2
         }
-      }));
+      }
+      ));
       return allapot;
     }   else 
         {
