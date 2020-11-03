@@ -3,13 +3,13 @@ const addtop = require('./topscores.json');
 
 
 const ezDoboz = (cella) => {
-  if (cella === 'B') {
+  if (cella === '📦') {
     return true
   }
   else {return false}
 }
 const ezUresVPenz = (cella) => {
-  if (cella === '$') {
+  if (cella === '🎈') {
     return cella
   }
   else if (cella === ' ') {

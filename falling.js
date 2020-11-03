@@ -12,7 +12,7 @@ const fallingBox = (aminek_esnie_kell, palya) => {
           if (aminek_esnie_kell[z].posy === t && aminek_esnie_kell[z].posx === o) {
             // van e a tomb adott pontjan doboz^
             for (let w = t; w < palya.length; w++) {
-              if (palya[w][o] !== 'B') {
+              if (palya[w][o] !== '📦') {
                 vaneures = vaneures + 1;
               }
             }

@@ -1,4 +1,3 @@
-
 [
     {
         "name": "in_jail_out_soon",
@@ -35,5 +34,9 @@
     {
         "name": "ask_yo_girl_about_me",
         "points": 5
+    },
+    {
+        "name": "Barbi",
+        "points": 24
     }
 ]
