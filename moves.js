@@ -3,13 +3,13 @@ const addtop = require('./topscores.json');
 
 
 const ezDoboz = (cella) => {
-  if (cella === 'B') {
+  if (cella === '📦') {
     return true
   }
   else {return false}
 }
 const ezUresVPenz = (cella) => {
-  if (cella === '$') {
+  if (cella === '🎈') {
     return cella
   }
   else if (cella === ' ') {
@@ -192,7 +192,8 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.clear();
       console.log('You are dead');
       console.log(jatekos.name);
-      console.log(jatekos.points);
+      console.log('Your points:', jatekos.points);
+      map.generateTopScores(5);
       //console.log(topscores);
       return allapot;
     }   else 

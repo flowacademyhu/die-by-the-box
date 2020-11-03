@@ -2,6 +2,7 @@ const table = require('table');
 const axel = require('axel');
 const topscores = require('./topscores.json');
 const fs = require('fs');
+const addtop = require('./topscores.json');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -10,55 +11,57 @@ const palyaKeret = (szelesseg, magassag) => {
   }
   return hasznalttomb;
 };
-
-
 const palyaKitoltes = (kitoltendo, player, boxstuff, scorestuff) => {
   for (let i = 0; i < kitoltendo.length; i++) {
     for (let k = 0; k < kitoltendo[i].length; k++) {
       kitoltendo[i][k] = ' ';
       for (let l = 0; l < scorestuff.length; l++) {
         if (i === scorestuff[l].posy && k === scorestuff[l].posx) {
-          kitoltendo[i][k] = '$';
+          kitoltendo[i][k] = '🎈';
         }
       }
       if ((i === player.posy) && (k === player.posx)) {
         if (player.head === 'top' && player.facing === 'right'){
-          kitoltendo[i][k] = '^>';}
+          kitoltendo[i][k] = '👉';}
         if (player.head === 'left' && player.facing === 'right'){
-          kitoltendo[i][k] = '<';}
+          kitoltendo[i][k] = '👍';}
         if (player.head === 'left' && player.facing === 'left'){
-            kitoltendo[i][k] = '<_';}
+            kitoltendo[i][k] = '👎';}
         if (player.head === 'right' && player.facing === 'right'){
-          kitoltendo[i][k] = ',>';}
+          kitoltendo[i][k] = '👇';}
         if (player.head === 'right' && player.facing === 'left'){
-            kitoltendo[i][k] = '^>';}
+            kitoltendo[i][k] = '👍';}
         if (player.head === 'top' && player.facing === 'left'){
-            kitoltendo[i][k] = '<^';}    
+            kitoltendo[i][k] = '👈';}
         }
       for (let l = 0; l < boxstuff.length; l++) {
         if (i === boxstuff[l].posy && k === boxstuff[l].posx) {
-          kitoltendo[i][k] = 'B';
+          kitoltendo[i][k] = '📦';
         }
       }
     }
   }
-  kitoltendo[0][0] = '🎖️';
+  kitoltendo[0][0] = '👌:';
   kitoltendo[0][1] = player.points;
-  kitoltendo[0][8] = '❤️';
+  kitoltendo[0][8] = '🩸:';
   kitoltendo[0][9] = player.lives;
   console.clear();
   return kitoltendo;
 };
-
-
 const drawMap = (map) => {
   console.log('Points:', player.points, 'Lives:', player.elet);
   const text = table.table(map);
   console.clear();
   console.log(text);
 };
-
 const addTopScore = (pointscollected, player) => {
+  for ( i = 0; i < topscores.length; i++ ) {
+  if (pointscollected > topscores[i].points) {
+    topscores[i].points = player.points;
+    topscores[i].name = player.name;
+    break
+  }
+}
   fs.readFile('./topscores.json', 'utf8', (err, data) => {
 
     if (err) {
@@ -87,8 +90,8 @@ const addTopScore = (pointscollected, player) => {
 
 const generateTopScores = (nOfScores) => { //és ki is írja
   let arrForTop = [];
-  for ( i = 0; i < arrForTop.length; i++ ) {
-      arrForTop.push([arrForTop[i].points ,arrForTop[i].name]);  //A teljes JSON-t tömbbe pakolja
+  for ( i = 0; i < addtop.length; i++ ) {
+      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {
@@ -99,12 +102,13 @@ const generateTopScores = (nOfScores) => { //és ki is írja
           return (a[0] < b[0]) ? -1 : 1;
       }
   }
-  console.log(arrForTop);
+  //console.log(arrForTop);
   // If nOfScores több mint amennyi score van
-  for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
+  for (i = arrForTop.length-1; i >= arrForTop.length-nOfScores; i--) { //kii
       console.log(arrForTop[i]);
   }
   };
+
 
 module.exports = {
     palyaKeret,
