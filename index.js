@@ -6,6 +6,10 @@ const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.json');
 const falling = require('./falling.js')
+
+var term = require( 'terminal-kit' ).terminal ;
+
+
 let topscores = addtopscore.topscores;
 let canPushKey = 0
 let szelesseg = 10
@@ -25,6 +29,41 @@ let torlendo = []
 let kellEsni = false;
 let isDead = false;
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany)
+
+
+term.cyan( 'Welcome to the World of Madness!\n' ) ;
+term.cyan( '\'Tis a world of mortal dangers, where laptops prey on the unwary.\n' ) ;
+
+let choice = '';
+var items = [
+	'New Game' ,
+	'Hall of Fame' ,
+	'Quit Game'
+] ;
+
+term.singleColumnMenu( items , function( error , response ) {
+	term( '\n' ).eraseLineAfter.green(
+		"#%s selected: %s \n" ,
+		response.selectedIndex ,
+		choice = response.selectedText ,
+	) ;
+		if (choice === 'New Game') {
+			const readline = require("readline");
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    
+    rl.question("What is your name ? ", function(name) {
+            console.log(`${name}, are you afraid? You will be.`);
+            player.name = name;
+            rl.close();
+    });
+    
+    rl.on("close", function() {
+        console.log("Your jounrey begins", player.name);
+        console.clear();
+
 setInterval(() => {
   if (isDead) {
     process.exit(0);
@@ -72,7 +111,15 @@ setInterval(() => {
     kellEsni = true;
   };
   let renderelt = table.table(tomb_ami_a_map, {
-    border: table.getBorderCharacters(`void`),
+    border: {
+      bodyLeft: `│`,
+      bodyRight: `│`,
+      bodyJoin: ` `,
+      joinBody: ` `,
+      joinLeft: `│`,
+      joinRight: `│`,
+      joinJoin: ` `
+    },
     columnDefault: {
         paddingLeft: 1,
         paddingRight: 2
@@ -105,7 +152,23 @@ stdin.on('data', (key) => {
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   let renderelt = table.table(tomb_ami_a_map, {
-    border: table.getBorderCharacters(`void`),
+    border: {
+      topBody: `─`,
+      topJoin: `─`,
+      topLeft: `┌`,
+      topRight: `┐`,
+      bottomBody: `─`,
+      bottomJoin: `─`,
+      bottomLeft: `└`,
+      bottomRight: `┘`,
+      bodyLeft: `│`,
+      bodyRight: `│`,
+      bodyJoin: ` `,
+      joinBody: ` `,
+      joinLeft: `│`,
+      joinRight: `│`,
+      joinJoin: ` `
+    },
     columnDefault: {
         paddingLeft: 1,
         paddingRight: 2
@@ -121,3 +184,16 @@ console.log(renderelt);
     process.exit(0);
   }
 });
+
+
+
+    });
+    }
+    else if (choice === 'Hall of Fame') {
+      console.log('Not implemented yet, sod off.')
+
+    }
+    else if (choice === 'Quit Game'){
+      process.exit(0);
+    }
+} ) ;
