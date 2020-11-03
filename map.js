@@ -104,9 +104,11 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   }
   //console.log(arrForTop);
   // If nOfScores több mint amennyi score van
+  let arrForTopN = [];
   for (i = arrForTop.length-1; i >= arrForTop.length-nOfScores; i--) { //kii
-      console.log(arrForTop[i]);
+    arrForTopN.push(arrForTop[i]);
   }
+  return arrForTopN;
   };
 
 
