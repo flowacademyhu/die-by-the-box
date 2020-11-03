@@ -110,8 +110,6 @@ const move_a = (player, tomb_ami_a_map) => {
 const move_d = (player, tomb_ami_a_map) => {
   let Vertikalis = player.posy ;
   let Horizontalis = player.posx 
-  let toleJobbra = tomb_ami_a_map[Vertikalis][Horizontalis + 1];
-  let toleJobbraFel = tomb_ami_a_map[Vertikalis-1][Horizontalis + 1];
   let felette = tomb_ami_a_map[Vertikalis - 1][Horizontalis];
   let allasa = player.head;
   let nezese = player.facing;
@@ -120,21 +118,21 @@ const move_d = (player, tomb_ami_a_map) => {
   // nem a szélén van
   if (player.posx !== mapVege) {
     // dobozbqa akar szaladni balról
-    if (ezDoboz(toleJobbra) && egyenesenAll(allasa)) {
+    if (ezDoboz(tomb_ami_a_map[Vertikalis] !== undefined && tomb_ami_a_map[Vertikalis[Horizontalis + 1]]) && egyenesenAll(allasa)) {
       // ráfordul_bal_also
       player.head = 'left';
       player.facing = 'right';
-    } else if (ezDoboz(toleJobbra) && fejeBalraAll(allasa)) {
+    } else if (ezDoboz( tomb_ami_a_map[Vertikalis] !== undefined && tomb_ami_a_map[Vertikalis[Horizontalis + 1]]) && fejeBalraAll(allasa)) {
       // rávanfordulva, lehet mászni
       // kell-e maszni, v sarkon van
       // masznikell, felfele
-      if (ezDoboz(toleJobbraFel) && ezDoboz(toleJobbra) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
+      if (ezDoboz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis[Horizontalis + 1]]) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--;
         player.head = 'left';
         player.facing = 'right'
       }
       // sarkon van felfele_balfelso
-      else if (ezUresVPenz(toleJobbraFel) && fejeBalraAll(allasa)) {
+      else if (ezUresVPenz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && fejeBalraAll(allasa)) {
         player.facing = 'right';
         player.head = 'top';
         player.posy--;
