@@ -87,8 +87,8 @@ const addTopScore = (pointscollected, player) => {
 
 const generateTopScores = (nOfScores) => { //és ki is írja
   let arrForTop = [];
-  for ( i = 0; i < addtop.length; i++ ) {
-      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
+  for ( i = 0; i < arrForTop.length; i++ ) {
+      arrForTop.push([arrForTop[i].points ,arrForTop[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {
@@ -99,6 +99,7 @@ const generateTopScores = (nOfScores) => { //és ki is írja
           return (a[0] < b[0]) ? -1 : 1;
       }
   }
+  console.log(arrForTop);
   // If nOfScores több mint amennyi score van
   for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
       console.log(arrForTop[i]);
