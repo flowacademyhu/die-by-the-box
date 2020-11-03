@@ -16,7 +16,7 @@ const palyaKitoltes = (kitoltendo, player, boxstuff, scorestuff) => {
       kitoltendo[i][k] = ' ';
       for (let l = 0; l < scorestuff.length; l++) {
         if (i === scorestuff[l].posy && k === scorestuff[l].posx) {
-          kitoltendo[i][k] = '$';
+          kitoltendo[i][k] = '🎈';
         }
       }
       if ((i === player.posy) && (k === player.posx)) {
@@ -35,14 +35,14 @@ const palyaKitoltes = (kitoltendo, player, boxstuff, scorestuff) => {
         }
       for (let l = 0; l < boxstuff.length; l++) {
         if (i === boxstuff[l].posy && k === boxstuff[l].posx) {
-          kitoltendo[i][k] = 'B';
+          kitoltendo[i][k] = '📦';
         }
       }
     }
   }
-  kitoltendo[0][0] = '🎖️';
+  kitoltendo[0][0] = '👌:';
   kitoltendo[0][1] = player.points;
-  kitoltendo[0][8] = '❤️';
+  kitoltendo[0][8] = '🩸:';
   kitoltendo[0][9] = player.lives;
   console.clear();
   return kitoltendo;
