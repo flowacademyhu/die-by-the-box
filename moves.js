@@ -186,8 +186,8 @@ const move_d = (player, tomb_ami_a_map) => {
 
 const playerDeath = (dobozok, jatekos, allapot) => {
   for (let i = 0; i < dobozok.length; i++) {
-    if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx) {
-      if (jatekos.lives === 0) {
+    if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
+      if (jatekos.lives < 1) {
       allapot = true;
       map.addTopScore(jatekos.points, jatekos.name);
       console.clear();
