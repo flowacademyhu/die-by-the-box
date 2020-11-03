@@ -72,7 +72,7 @@ setInterval(() => {
     kellEsni = true;
   };
   let renderelt = table.table(tomb_ami_a_map, {
-    border: table.getBorderCharacters(`void`),
+    border: table.getBorderCharacters(`honeywell`),
     columnDefault: {
         paddingLeft: 0,
         paddingRight: 1
@@ -105,7 +105,7 @@ stdin.on('data', (key) => {
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
   let renderelt = table.table(tomb_ami_a_map, {
-    border: table.getBorderCharacters(`void`),
+    border: table.getBorderCharacters(`honeywell`),
     columnDefault: {
         paddingLeft: 0,
         paddingRight: 1
