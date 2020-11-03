@@ -217,7 +217,7 @@ term.singleColumnMenu(items, function (error, response) {
           term.cyan(allEntries[z].name, ' ', allEntries[z].points, '\n')
         }
         console.log('Press Q to quit.')
-        console.log('Press N to begind your journey.')
+        console.log('Press N to begin your journey.')
         const stdin = process.stdin;
         stdin.setRawMode(true);
         stdin.resume();
