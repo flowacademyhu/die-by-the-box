@@ -6,13 +6,11 @@ const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.js');
 const falling = require('./falling.js')
-
 let topscores = addtopscore.topscores;
 let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
 let tomb_ami_a_map = palyaKeret(szelesseg, magassag);
-
 let scoremany = []
 let player = { posx: tomb_ami_a_map[0].length / 2, posy: Math.floor(tomb_ami_a_map.length - 1), head: 'top', facing: 'left', points: 99999, lives:2, name:'Tesztelek' };
 let boxmany = []
@@ -26,9 +24,7 @@ let szamolos = 0;
 let torlendo = []
 let kellEsni = false;
 let isDead = false;
-
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany)
-
 setInterval(() => {
   if (isDead) {
     process.exit(0);
@@ -38,7 +34,6 @@ setInterval(() => {
   // score eses
   scoremany = falling.falling(scoremany, tomb_ami_a_map);
   // score torles
-  
   if (player.posy !== magassag-1 && player.head === 'top' && (tomb_ami_a_map[player.posy+1][player.posx] === ' ' || tomb_ami_a_map[player.posy+1][player.posx] === '$'  )) {
     kellEsni = true
   }
@@ -70,17 +65,23 @@ setInterval(() => {
     tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
     kellEsni = true;
   };
-  // map.drawMap(tomb_ami_a_map);
-  console.log(tomb_ami_a_map);
+  let renderelt = table.table(tomb_ami_a_map, {
+    border: table.getBorderCharacters(`void`),
+    columnDefault: {
+        paddingLeft: 0,
+        paddingRight: 1
+    },
+    drawHorizontalLine: () => {
+        return false
+    }
+});
+console.log(renderelt);
   counter_doboz = counter_doboz + 1;
   counter_jutalom = counter_jutalom +1;
   isDead = moves.playerDeath(boxmany, player, isDead);
 }, 300);
-
 //regi tomb az uj elemekkel kibővítve
-
 //Karakter mozgás
-
 const stdin = process.stdin;
 stdin.setRawMode(true);
 stdin.resume();
@@ -95,12 +96,20 @@ stdin.on('data', (key) => {
   }
   console.clear();
   tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
-  console.log(tomb_ami_a_map);
+  let renderelt = table.table(tomb_ami_a_map, {
+    border: table.getBorderCharacters(`void`),
+    columnDefault: {
+        paddingLeft: 0,
+        paddingRight: 1
+    },
+    drawHorizontalLine: () => {
+        return false
+    }
+});
+console.log(renderelt);
   //lehetnyomni
   if (key === 'q') {
     console.log('Quitter! You might as well quit life too!!!')
     process.exit(0);
   }
 });
-
-
