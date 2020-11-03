@@ -1,4 +1,3 @@
-
 [
     {
         "name": "in_jail_out_soon",
@@ -25,7 +24,19 @@
         "points": 51
     },
     {
+        "name": "Tesztelek",
+        "points": 28
+    },
+    {
+        "name": "Bill",
+        "points": 1
+    },
+    {
         "name": "ask_yo_girl_about_me",
         "points": 5
+    },
+    {
+        "name": "Barbi",
+        "points": 24
     }
 ]
