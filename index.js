@@ -28,6 +28,7 @@ let szamolos = 0;
 let torlendo = []
 let kellEsni = false;
 let isDead = false;
+let nOfScores = 5;
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany)
 
 term.cyan('Welcome to the World of Madness!\n');

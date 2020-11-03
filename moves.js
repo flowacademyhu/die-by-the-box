@@ -1,5 +1,6 @@
 const map = require('./map.js');
 const addtop = require('./topscores.json');
+const table = require('table');
 
 
 const ezDoboz = (cella) => {
@@ -192,8 +193,9 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.clear();
       console.log('You are dead');
       console.log(jatekos.name);
-      console.log(jatekos.points);
-      //console.log(topscores);
+      console.log('Your points:', jatekos.points);
+      console.log('TOP SCORES:')
+      console.log(table.table(map.generateTopScores(5)));
       return allapot;
     }   else 
         {

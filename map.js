@@ -2,6 +2,7 @@ const table = require('table');
 const axel = require('axel');
 const topscores = require('./topscores.json');
 const fs = require('fs');
+const addtop = require('./topscores.json');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -101,11 +102,15 @@ const generateTopScores = (nOfScores) => { //és ki is írja
           return (a[0] < b[0]) ? -1 : 1;
       }
   }
+  //console.log(arrForTop);
   // If nOfScores több mint amennyi score van
-  for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
-      console.log(arrForTop[i]);
+  let arrForTopN = [];
+  for (i = arrForTop.length-1; i >= arrForTop.length-nOfScores; i--) { //kii
+    arrForTopN.push(arrForTop[i]);
   }
+  return arrForTopN;
   };
+
 
 module.exports = {
     palyaKeret,
