@@ -27,6 +27,16 @@ const spawnBoxes = (boxNum, szelesseg) => {
     return boxTomb
     };
 
+const spawnInterval = (ezEssen_Osszes, mennyiEssen, szelesseg) => {
+    let ezEssen_uj = []
+    ezEssen_uj = spawnBoxes(mennyiEssen, szelesseg)
+    for (let d = 0; d < ezEssen_uj.length; d++) {
+      ezEssen_Osszes.push(ezEssen_uj[d])
+    }
+    return ezEssen_Osszes;
+}
+
+
 const alsotSzamolSzam = (boxok, magassag) => {
     let ennyivanalul = 0;
     for (let k = 0; k < boxok.length; k++) {
@@ -69,5 +79,6 @@ module.exports = {
     spawnBoxes,
     alsotSzamolSzam,
     alsotSzamolTomb,
-    alsotTorol
+    alsotTorol,
+    spawnInterval
 };
