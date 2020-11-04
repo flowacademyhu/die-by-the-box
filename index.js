@@ -2,13 +2,11 @@ const map = require('./map');
 const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
-const { box } = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.json');
-const falling = require('./falling.js')
-
+const falling = require('./falling.js');
 var term = require( 'terminal-kit' ).terminal ;
-
+var ctx = require('axel');
 
 let topscores = addtopscore.topscores;
 let canPushKey = 0
@@ -112,20 +110,32 @@ setInterval(() => {
   };
   let renderelt = table.table(tomb_ami_a_map, {
     border: {
+      topBody: `─`,
+      topJoin: ``,
+      topLeft: `┌`,
+      topRight: `┐`,
+   
+      bottomBody: `─`,
+      bottomJoin: ``,
+      bottomLeft: `└`,
+      bottomRight: `┘`,
+   
       bodyLeft: `│`,
       bodyRight: `│`,
-      bodyJoin: ` `,
-      joinBody: ` `,
-      joinLeft: `│`,
-      joinRight: `│`,
-      joinJoin: ` `
+      bodyJoin: ``,
+   
+      joinBody: ``,
+      joinLeft: ``,
+      joinRight: ``,
+      joinJoin: ``
     },
     columnDefault: {
         paddingLeft: 1,
-        paddingRight: 2
+        paddingRight: 2,
+        width: 3
     },
-    drawHorizontalLine: () => {
-        return false
+    drawHorizontalLine: (index, size) => {
+      return index === 0 || index === size;
     }
 });
 console.log(renderelt);
@@ -154,27 +164,31 @@ stdin.on('data', (key) => {
   let renderelt = table.table(tomb_ami_a_map, {
     border: {
       topBody: `─`,
-      topJoin: `─`,
+      topJoin: ``,
       topLeft: `┌`,
       topRight: `┐`,
+   
       bottomBody: `─`,
-      bottomJoin: `─`,
+      bottomJoin: ``,
       bottomLeft: `└`,
       bottomRight: `┘`,
+   
       bodyLeft: `│`,
       bodyRight: `│`,
-      bodyJoin: ` `,
-      joinBody: ` `,
-      joinLeft: `│`,
-      joinRight: `│`,
-      joinJoin: ` `
+      bodyJoin: ``,
+   
+      joinBody: ``,
+      joinLeft: ``,
+      joinRight: ``,
+      joinJoin: ``
     },
     columnDefault: {
         paddingLeft: 1,
-        paddingRight: 2
+        paddingRight: 2,
+        width: 3
     },
-    drawHorizontalLine: () => {
-        return false
+    drawHorizontalLine: (index, size) => {
+        return index === 0 || index === size;
     }
 });
 console.log(renderelt);
