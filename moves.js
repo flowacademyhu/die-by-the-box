@@ -1,5 +1,6 @@
 const map = require('./map.js');
 const addtop = require('./topscores.json');
+const table = require('table');
 
 
 const ezDoboz = (cella) => {
@@ -48,13 +49,13 @@ const move_a = (player, tomb_ami_a_map) => {
       //rávanfordulva, lehet mászni
       //kell-e maszni, v sarkon van
       //masznikell, felfele
-      if (ezDoboz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis-1]) && fejeJobbraAll(allasa) && ezUresVPenz(felette)) {
+      if (ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis-1]) && fejeJobbraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--
         player.head = 'right';
         player.facing = 'left';
       }
       //sarkon van felfele_jobbfelso
-      else if (ezUresVPenz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && fejeJobbraAll(allasa)) {
+      else if (ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && fejeJobbraAll(allasa)) {
         player.facing = 'left'
         player.head = 'top';
         player.posy--;
@@ -124,13 +125,13 @@ const move_d = (player, tomb_ami_a_map) => {
       // rávanfordulva, lehet mászni
       // kell-e maszni, v sarkon van
       // masznikell, felfele
-      if (ezDoboz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis + 1]) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
+      if ( ezLetezik(tomb_ami_a_map[Vertikalis-1]) && ezDoboz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis + 1]) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--;
         player.head = 'left';
         player.facing = 'right'
       }
       // sarkon van felfele_balfelso
-      else if (ezUresVPenz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && fejeBalraAll(allasa)) {
+      else if ( ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && fejeBalraAll(allasa)) {
         player.facing = 'right';
         player.head = 'top';
         player.posy--;
@@ -185,15 +186,43 @@ const move_d = (player, tomb_ami_a_map) => {
 
 const playerDeath = (dobozok, jatekos, allapot) => {
   for (let i = 0; i < dobozok.length; i++) {
-    if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx) {
-      if (jatekos.lives === 0) {
+    if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
+      if (jatekos.lives < 1) {
       allapot = true;
       map.addTopScore(jatekos.points, jatekos.name);
       console.clear();
       console.log('You are dead');
       console.log(jatekos.name);
-      console.log(jatekos.points);
-      //console.log(topscores);
+      console.log('Your points:', jatekos.points);
+      console.log(map.newRecord(jatekos.points, 5));
+      console.log('TOP SCORES:')
+      console.log(table.table(map.generateTopScores(5), {
+        border: {
+          topBody: `─`,
+          topJoin: `─`,
+          topLeft: `┌`,
+          topRight: `┐`,
+          
+          bottomBody: `─`,
+          bottomJoin: `─`,
+          bottomLeft: `└`,
+          bottomRight: `┘`,
+          
+          bodyLeft: `|`,
+          bodyRight: `|`,
+          bodyJoin: ` `,
+          
+          joinBody: ` `,
+          joinLeft: `│`,
+          joinRight: `│`,
+          joinJoin: ` `
+        },
+        columnDefault: {
+          paddingLeft: 1,
+          paddingRight: 2
+        }
+      }
+      ));
       return allapot;
     }   else 
         {

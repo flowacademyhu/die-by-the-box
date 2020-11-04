@@ -2,6 +2,7 @@ const table = require('table');
 const axel = require('axel');
 const topscores = require('./topscores.json');
 const fs = require('fs');
+const addtop = require('./topscores.json');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -101,16 +102,30 @@ const generateTopScores = (nOfScores) => { //és ki is írja
           return (a[0] < b[0]) ? -1 : 1;
       }
   }
+  //console.log(arrForTop);
   // If nOfScores több mint amennyi score van
-  for (i = arrForTop.length-1; i >= arrForTop.length - nOfScores; i--) { //kii
-      console.log(arrForTop[i]);
+  let arrForTopN = [];
+  for (i = arrForTop.length-1; i >= arrForTop.length-nOfScores; i--) { //kii
+    arrForTopN.push(arrForTop[i]);
   }
+  return arrForTopN;
   };
+
+  let newRecord = (points, nOfScores) => {
+    let top = generateTopScores(nOfScores);
+    if (points > top[nOfScores-1][0]) {
+      return 'Yaay! Your score is in TOP5 now! \n Congratulations!'
+    } else {
+      return 'Not good, not terrible.' 
+    }
+  }
+
 
 module.exports = {
     palyaKeret,
     palyaKitoltes,
     drawMap,
     addTopScore,
-    generateTopScores
+    generateTopScores,
+    newRecord
   };
