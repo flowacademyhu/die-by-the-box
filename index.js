@@ -107,24 +107,13 @@ rl.on("close", function () {
 
     let renderelt = table.table(tomb_ami_a_map, {
       border: {
-        topBody: `─`,
-        topJoin: ``,
-        topLeft: `┌`,
-        topRight: `┐`,
-     
-        bottomBody: `─`,
-        bottomJoin: ``,
-        bottomLeft: `└`,
-        bottomRight: `┘`,
-     
         bodyLeft: `│`,
         bodyRight: `│`,
-        bodyJoin: ``,
-     
-        joinBody: ``,
-        joinLeft: ``,
-        joinRight: ``,
-        joinJoin: ``
+        bodyJoin: ` `,
+        joinBody: ` `,
+        joinLeft: `│`,
+        joinRight: `│`,
+        joinJoin: ` `
       },
       columnDefault: {
         paddingLeft: 1,
@@ -174,7 +163,7 @@ rl.on("close", function () {
         bodyRight: `│`,
         bodyJoin: ``,
      
-        joinBody: ``,
+        joinBody: `─`,
         joinLeft: ``,
         joinRight: ``,
         joinJoin: ``
