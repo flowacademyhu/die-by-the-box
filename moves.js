@@ -49,13 +49,13 @@ const move_a = (player, tomb_ami_a_map) => {
       //rávanfordulva, lehet mászni
       //kell-e maszni, v sarkon van
       //masznikell, felfele
-      if (ezDoboz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis-1]) && fejeJobbraAll(allasa) && ezUresVPenz(felette)) {
+      if (ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis-1]) && fejeJobbraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--
         player.head = 'right';
         player.facing = 'left';
       }
       //sarkon van felfele_jobbfelso
-      else if (ezUresVPenz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && fejeJobbraAll(allasa)) {
+      else if (ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis - 1][Horizontalis - 1]) && fejeJobbraAll(allasa)) {
         player.facing = 'left'
         player.head = 'top';
         player.posy--;
@@ -125,13 +125,13 @@ const move_d = (player, tomb_ami_a_map) => {
       // rávanfordulva, lehet mászni
       // kell-e maszni, v sarkon van
       // masznikell, felfele
-      if (ezDoboz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis + 1]) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
+      if ( ezLetezik(tomb_ami_a_map[Vertikalis-1]) && ezDoboz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis][Horizontalis + 1]) && fejeBalraAll(allasa) && ezUresVPenz(felette)) {
         player.posy--;
         player.head = 'left';
         player.facing = 'right'
       }
       // sarkon van felfele_balfelso
-      else if (ezUresVPenz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && fejeBalraAll(allasa)) {
+      else if ( ezLetezik(tomb_ami_a_map[Vertikalis - 1]) && ezUresVPenz(tomb_ami_a_map[Vertikalis-1][Horizontalis + 1]) && fejeBalraAll(allasa)) {
         player.facing = 'right';
         player.head = 'top';
         player.posy--;
