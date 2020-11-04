@@ -56,12 +56,12 @@ const theGameItself = () => {
   rl.on("close", function () {
 
     setInterval(() => {
+      // box eses
+      boxmany = falling.fallingBox(boxmany, tomb_ami_a_map);
       isDead = moves.playerDeath(boxmany, player, isDead);
       if (isDead) {
         process.exit(0);
       }
-      // box eses
-      boxmany = falling.fallingBox(boxmany, tomb_ami_a_map);
       // score eses
       scoremany = falling.fallingScore(scoremany, boxmany, tomb_ami_a_map);
       // score torles
