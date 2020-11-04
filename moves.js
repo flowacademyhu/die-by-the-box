@@ -1,5 +1,5 @@
 const map = require('./map.js');
-let addtop = require('./topscores.json');
+const topscores = require('./topscores.json');
 const table = require('table');
 const { newRecord } = require('./map.js');
 const ctx = require('axel');

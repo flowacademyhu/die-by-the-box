@@ -4,13 +4,13 @@ const boxes = require('./boxes');
 const table = require('table');
 const ctx = require('axel');
 const moves = require('./moves.js');
-let addtopscore = require('./topscores.json');
+const addtopscore = require('./topscores.json');
 const falling = require('./falling.js');
 const fs = require('fs');
 
 var term = require('terminal-kit').terminal;
 
-let topscores = addtopscore.topscores;
+
 let canPushKey = 0
 let szelesseg = 10
 let magassag = 15
