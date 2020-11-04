@@ -1,5 +1,5 @@
 const table = require('table');
-const axel = require('axel');
+const ctx = require('axel');
 const topscores = require('./topscores.json');
 const fs = require('fs');
 const addtop = require('./topscores.json');
@@ -114,9 +114,40 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   let newRecord = (points, nOfScores) => {
     let top = generateTopScores(nOfScores);
     if (points > top[nOfScores-1][0]) {
-      return 'Yaay! Your score is in TOP5 now! \n Congratulations!'
+
     } else {
-      return 'Not good, not terrible.' 
+      console.clear() 
+      ctx.clear();
+ctx.bg(0,0,61);
+ctx.box(1,1,35,40);
+ctx.fg(204,0,0);
+ctx.text(15,5, "GAME OVER!");
+ctx.bg(153,0,0);
+ctx.box(1,9,35,1);
+ctx.bg(219,21,21);
+ctx.box(1,8,35,1);
+ctx.bg(255,128,0);
+ctx.box(1,7,35,1);
+ctx.bg(0,0,153);
+ctx.box(1,6,35,1);
+ctx.bg(51,102,0);
+ctx.box(1,10,35,40);
+ctx.bg(204,102,0);
+ctx.box(14,7,10,5);
+ctx.bg(64,64,64);
+ctx.box(15,8,8,6);
+ctx.bg(64,64,64);
+ctx.box(14,12,10,2);
+ctx.fg(0,0,0);
+ctx.text(17,9, "RIP");
+ctx.bg(51,102,12);
+ctx.box(15,20,10,10);
+ctx.bg(20,40,0);
+ctx.box(14,14,10,6);
+ctx.bg(20,40,0);
+ctx.box(12,16,14,3);
+ctx.bg(20,40,0);
+ctx.box(10,19,18,3);
     }
   }
 
