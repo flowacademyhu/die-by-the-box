@@ -1,6 +1,8 @@
 const map = require('./map.js');
-const addtop = require('./topscores.json');
+let addtop = require('./topscores.json');
 const table = require('table');
+const { newRecord } = require('./map.js');
+const ctx = require('axel');
 
 
 const ezDoboz = (cella) => {
@@ -185,6 +187,7 @@ const move_d = (player, tomb_ami_a_map) => {
 }
 
 const playerDeath = (dobozok, jatekos, allapot) => {
+  let answer2 = []
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
       if (jatekos.lives < 1) {
@@ -194,7 +197,9 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log('You are dead');
       console.log(jatekos.name);
       console.log('Your points:', jatekos.points);
-      console.log(map.newRecord(jatekos.points, 5));
+      answer2 = map.newRecord(jatekos.points, jatekos.name);
+      console.log(answer2[0]);
+      console.log(table.table(answer2[1]))
       return allapot;
     }   else 
         {

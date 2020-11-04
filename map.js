@@ -1,8 +1,9 @@
 const table = require('table');
-const ctx = require('axel');
+const axel = require('axel');
 const topscores = require('./topscores.json');
 const fs = require('fs');
-const addtop = require('./topscores.json');
+
+
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -55,13 +56,15 @@ const drawMap = (map) => {
   console.log(text);
 };
 const addTopScore = (pointscollected, player) => {
-  for ( i = 0; i < topscores.length; i++ ) {
-  if (pointscollected > topscores[i].points) {
-    topscores[i].points = player.points;
-    topscores[i].name = player.name;
-    break
-  }
-}
+//   let tempobject = {"name": '', "points": 0}
+//   for ( i = 0; i < topscores.length; i++ ) {
+//   if (pointscollected > topscores[i].points) {
+//     tempobject.points = player.points;
+//     tempobject.name = player.name;
+//     topscores.push(tempobject);
+//     break
+//   }
+// }
   fs.readFile('./topscores.json', 'utf8', (err, data) => {
 
     if (err) {
@@ -88,10 +91,10 @@ const addTopScore = (pointscollected, player) => {
 })
 };
 
-const generateTopScores = (nOfScores) => { //és ki is írja
+const generateTopScores = (nOfScores) => {  //és ki is írja
   let arrForTop = [];
-  for ( i = 0; i < addtop.length; i++ ) {
-      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
+  for ( i = 0; i < topscores.length; i++ ) {
+      arrForTop.push([topscores[i].points ,topscores[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {
@@ -111,44 +114,21 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   return arrForTopN;
   };
 
-  let newRecord = (points, nOfScores) => {
-    let top = generateTopScores(nOfScores);
-    if (points > top[nOfScores-1][0]) {
-
-    } else {
-      console.clear() 
-      ctx.clear();
-ctx.bg(0,0,61);
-ctx.box(1,1,35,40);
-ctx.fg(204,0,0);
-ctx.text(15,5, "GAME OVER!");
-ctx.bg(153,0,0);
-ctx.box(1,9,35,1);
-ctx.bg(219,21,21);
-ctx.box(1,8,35,1);
-ctx.bg(255,128,0);
-ctx.box(1,7,35,1);
-ctx.bg(0,0,153);
-ctx.box(1,6,35,1);
-ctx.bg(51,102,0);
-ctx.box(1,10,35,40);
-ctx.bg(204,102,0);
-ctx.box(14,7,10,5);
-ctx.bg(64,64,64);
-ctx.box(15,8,8,6);
-ctx.bg(64,64,64);
-ctx.box(14,12,10,2);
-ctx.fg(0,0,0);
-ctx.text(17,9, "RIP");
-ctx.bg(51,102,12);
-ctx.box(15,20,10,10);
-ctx.bg(20,40,0);
-ctx.box(14,14,10,6);
-ctx.bg(20,40,0);
-ctx.box(12,16,14,3);
-ctx.bg(20,40,0);
-ctx.box(10,19,18,3);
-    }
+  let newRecord = (points, name) => {
+    let top = generateTopScores(5);
+    let answer = []
+    for (let i = 0; i < top.length ; i++ ) {
+      if (points > top[i][0]) {
+        top.splice(i, 0, [points, name]);
+        top.pop();
+        answer.push('Yaay! Your score is in TOP5 now! \n Congratulations!\n\n')
+        answer.push(top)
+        return answer
+      } 
+    } 
+    answer.push('Not good, not terrible.')
+    answer.push(top);
+    return answer
   }
 
 

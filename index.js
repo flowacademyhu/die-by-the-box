@@ -2,10 +2,10 @@ const map = require('./map');
 const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
-const axel = require('axel');
+const ctx = require('axel');
 const moves = require('./moves.js');
-const addtopscore = require('./topscores.json');
-const falling = require('./falling.js')
+let addtopscore = require('./topscores.json');
+const falling = require('./falling.js');
 const fs = require('fs');
 
 var term = require('terminal-kit').terminal;
@@ -60,8 +60,8 @@ const theGameItself = () => {
       boxmany = falling.fallingBox(boxmany, tomb_ami_a_map);
       isDead = moves.playerDeath(boxmany, player, isDead);
       if (isDead) {
-        process.exit(0);
-      }
+          process.exit(0);
+      };
       // score eses
       scoremany = falling.fallingScore(scoremany, boxmany, tomb_ami_a_map);
       // score torles
