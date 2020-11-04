@@ -1,6 +1,6 @@
 const table = require('table');
 const axel = require('axel');
-const topscores = require('./topscores.json');
+const addtop = require('./topscores.json');
 const fs = require('fs');
 
 
@@ -93,8 +93,8 @@ const addTopScore = (pointscollected, player) => {
 
 const generateTopScores = (nOfScores) => {  //és ki is írja
   let arrForTop = [];
-  for ( i = 0; i < topscores.length; i++ ) {
-      arrForTop.push([topscores[i].points ,topscores[i].name]);  //A teljes JSON-t tömbbe pakolja
+  for ( i = 0; i < addtop.length; i++ ) {
+      arrForTop.push([addtop[i].points, addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {

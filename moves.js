@@ -192,8 +192,8 @@ const playerDeath = (dobozok, jatekos, allapot) => {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
       if (jatekos.lives < 1) {
       allapot = true;
-      map.addTopScore(jatekos.points, jatekos.name);
       console.clear();
+      map.addTopScore(jatekos.points, jatekos.name);
       console.log('You are dead');
       console.log(jatekos.name);
       console.log('Your points:', jatekos.points);
