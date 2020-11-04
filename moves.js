@@ -1,5 +1,5 @@
 const map = require('./map.js');
-const addtop = require('./topscores.json');
+let addtop = require('./topscores.json');
 const table = require('table');
 
 
@@ -194,35 +194,38 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log('You are dead');
       console.log(jatekos.name);
       console.log('Your points:', jatekos.points);
-      console.log(map.newRecord(jatekos.points, 5));
-      console.log('TOP SCORES:')
-      console.log(table.table(map.generateTopScores(5), {
-        border: {
-          topBody: `─`,
-          topJoin: `─`,
-          topLeft: `┌`,
-          topRight: `┐`,
+      console.log(map.newRecord(jatekos.points, jatekos.name));
+      //console.log('TOP SCORES:')
+      addtop = require('./topscores.json');
+      //console.log(table.table(map.generateTopScores(5)));
+      //, 
+      //{
+      //   border: {
+      //     topBody: `─`,
+      //     topJoin: `─`,
+      //     topLeft: `┌`,
+      //     topRight: `┐`,
           
-          bottomBody: `─`,
-          bottomJoin: `─`,
-          bottomLeft: `└`,
-          bottomRight: `┘`,
+      //     bottomBody: `─`,
+      //     bottomJoin: `─`,
+      //     bottomLeft: `└`,
+      //     bottomRight: `┘`,
           
-          bodyLeft: `|`,
-          bodyRight: `|`,
-          bodyJoin: ` `,
+      //     bodyLeft: `|`,
+      //     bodyRight: `|`,
+      //     bodyJoin: ` `,
           
-          joinBody: ` `,
-          joinLeft: `│`,
-          joinRight: `│`,
-          joinJoin: ` `
-        },
-        columnDefault: {
-          paddingLeft: 1,
-          paddingRight: 2
-        }
-      }
-      ));
+      //     joinBody: ` `,
+      //     joinLeft: `│`,
+      //     joinRight: `│`,
+      //     joinJoin: ` `
+      //   },
+      //   columnDefault: {
+      //     paddingLeft: 1,
+      //     paddingRight: 2
+      //   }
+      // }
+      //));
       return allapot;
     }   else 
         {

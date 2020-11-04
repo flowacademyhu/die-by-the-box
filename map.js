@@ -1,8 +1,9 @@
 const table = require('table');
 const axel = require('axel');
-const topscores = require('./topscores.json');
+let topscores = require('./topscores.json');
 const fs = require('fs');
-const addtop = require('./topscores.json');
+
+
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -55,13 +56,15 @@ const drawMap = (map) => {
   console.log(text);
 };
 const addTopScore = (pointscollected, player) => {
-  for ( i = 0; i < topscores.length; i++ ) {
-  if (pointscollected > topscores[i].points) {
-    topscores[i].points = player.points;
-    topscores[i].name = player.name;
-    break
-  }
-}
+//   let tempobject = {"name": '', "points": 0}
+//   for ( i = 0; i < topscores.length; i++ ) {
+//   if (pointscollected > topscores[i].points) {
+//     tempobject.points = player.points;
+//     tempobject.name = player.name;
+//     topscores.push(tempobject);
+//     break
+//   }
+// }
   fs.readFile('./topscores.json', 'utf8', (err, data) => {
 
     if (err) {
@@ -88,10 +91,10 @@ const addTopScore = (pointscollected, player) => {
 })
 };
 
-const generateTopScores = (nOfScores) => { //és ki is írja
+const generateTopScores = (nOfScores) => {  //és ki is írja
   let arrForTop = [];
-  for ( i = 0; i < addtop.length; i++ ) {
-      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
+  for ( i = 0; i < topscores.length; i++ ) {
+      arrForTop.push([topscores[i].points ,topscores[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {
@@ -111,15 +114,30 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   return arrForTopN;
   };
 
-  let newRecord = (points, nOfScores) => {
-    let top = generateTopScores(nOfScores);
-    if (points > top[nOfScores-1][0]) {
-      return 'Yaay! Your score is in TOP5 now! \n Congratulations!'
-    } else {
-      return 'Not good, not terrible.' 
-    }
+  let newRecord = (points, name) => {
+    let top = generateTopScores(5);
+    for (let i = 0; i < top.length ; i++ ) {
+      if (points > top[i][0]) {
+        top.splice(i, 0, [name, points]);
+        top.pop();
+        console.log('Yaay! Your score is in TOP5 now! \n Congratulations!\n\n', table.table(top));
+        break
+      } 
+    } 
+    //return 'Not good, not terrible.2'
   }
 
+  // let textForTopScore = () => {
+  //     axel.bg(255,0,0);
+  //     axel.fg(255,255,255);
+  //     axel.text(1,1,"N");
+  //     axel.text(18,2,"N");
+  //     axel.text(18,3,"N");
+  //     axel.text(18,4,"N");
+  //     //axel.text(5,8,"Yaay! Your score is in TOP5 now!");
+  //     //axel.text(10,9,"Congratulations!");
+  //     axel.cursor.restore();
+  // }
 
 module.exports = {
     palyaKeret,
@@ -127,5 +145,6 @@ module.exports = {
     drawMap,
     addTopScore,
     generateTopScores,
-    newRecord
+    newRecord,
+    //textForTopScore
   };
