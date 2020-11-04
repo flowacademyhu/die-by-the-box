@@ -2,7 +2,7 @@ const map = require('./map');
 const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
-const { box } = require('axel');
+const axel = require('axel');
 const moves = require('./moves.js');
 const addtopscore = require('./topscores.json');
 const falling = require('./falling.js')
@@ -69,11 +69,11 @@ rl.on("close", function () {
     // score torles
     player.points = boxes.ScorePlayer(scoremany, player)
     scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
-    //
+    //esik-e
     if (player.posy !== magassag - 1 && ((tomb_ami_a_map[player.posy + 1] !== undefined && (tomb_ami_a_map[player.posy][player.posx - 1] === ' ' || tomb_ami_a_map[player.posy][player.posx - 1] === undefined ) && (tomb_ami_a_map[player.posy][player.posx + 1] === ' ' || tomb_ami_a_map[player.posy][player.posx + 1] === undefined ) && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') || (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === '🎈'))) {
       kellEsni = true
     }
-    if (kellEsni && player.posy !== magassag -1) {
+    if (kellEsni && player.posy !== magassag -1 && ((tomb_ami_a_map[player.posy+1] !== undefined && (tomb_ami_a_map[player.posy+1][player.posx] === ' '  || tomb_ami_a_map[player.posy+1][player.posx] === '🎈' )))) {
       player.posy++;
       kellEsni = false;
     }
@@ -104,6 +104,7 @@ rl.on("close", function () {
       tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
       kellEsni = true;
     };
+
     let renderelt = table.table(tomb_ami_a_map, {
       border: {
         bodyLeft: `│`,
@@ -125,9 +126,9 @@ rl.on("close", function () {
     console.log(renderelt);
     counter_doboz = counter_doboz + 1;
     counter_jutalom = counter_jutalom + 1;
-    isDead = moves.playerDeath(boxmany, player, isDead);
   }, 300);
-  //regi tomb az uj elemekkel kibővítve
+
+
   //Karakter mozgás
   const stdin = process.stdin;
   stdin.setRawMode(true);
@@ -224,19 +225,19 @@ term.singleColumnMenu(items, function (error, response) {
         ideiglenesTomb.push(ideiglenesTarolo);
         }
         console.log(table.table(ideiglenesTomb))
-        console.log('Press Q to quit.')
-        console.log('Press N to begin your journey.')
+        console.log('Press * to quit.')
+        console.log('Press - to begin your journey.')
         const stdin = process.stdin;
         stdin.setRawMode(true);
         stdin.resume();
         stdin.setEncoding('utf8');
         stdin.on('data', (key) => {
           // spamszamlalo
-          if (key === 'q') {
+          if (key === '*') {
             console.log('See you around, Space Cowboy!');
             process.exit(0)
           }
-          if (key === 'n') {
+          if (key === '-') {
             theGameItself()
           }
         })
