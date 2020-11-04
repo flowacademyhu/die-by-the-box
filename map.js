@@ -124,20 +124,9 @@ const generateTopScores = (nOfScores) => {  //és ki is írja
         break
       } 
     } 
-    //return 'Not good, not terrible.2'
+    console.log('Not good. Not terrible.\n\n', table.table(top));
   }
 
-  // let textForTopScore = () => {
-  //     axel.bg(255,0,0);
-  //     axel.fg(255,255,255);
-  //     axel.text(1,1,"N");
-  //     axel.text(18,2,"N");
-  //     axel.text(18,3,"N");
-  //     axel.text(18,4,"N");
-  //     //axel.text(5,8,"Yaay! Your score is in TOP5 now!");
-  //     //axel.text(10,9,"Congratulations!");
-  //     axel.cursor.restore();
-  // }
 
 module.exports = {
     palyaKeret,
@@ -145,6 +134,5 @@ module.exports = {
     drawMap,
     addTopScore,
     generateTopScores,
-    newRecord,
-    //textForTopScore
+    newRecord
   };
