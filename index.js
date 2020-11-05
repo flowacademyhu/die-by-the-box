@@ -237,7 +237,22 @@ term.singleColumnMenu(items, function (error, response) {
           ideiglenesTarolo.push(allEntries[z].points);
           ideiglenesTomb.push(ideiglenesTarolo);
         }
-        console.log(table.table(ideiglenesTomb))
+        ideiglenesTomb.unshift(['Names' , 'Points'])
+        let borderingIdeiglenes = table.table(ideiglenesTomb, {
+          columnDefault: {
+            width:20
+          },
+          columnCount: 2,
+          columns: {
+            0: {
+              alignment: 'center'
+            },
+            1: {
+              alignment: 'center',
+            }
+          }
+        });
+        console.log(borderingIdeiglenes)
         console.log('Press * to quit.')
         console.log('Press - to begin your journey.')
         const stdin = process.stdin;
