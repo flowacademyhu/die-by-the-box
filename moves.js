@@ -3,6 +3,7 @@ const topscores = require('./topscores.json');
 const table = require('table');
 const { newRecord } = require('./map.js');
 const ctx = require('axel');
+const chalk = require('chalk')
 
 
 const ezDoboz = (cella) => {
@@ -200,7 +201,7 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       answer2 = map.newRecord(jatekos.points, jatekos.name);
       console.log(answer2[0]);
       answer2[1].unshift(cimlec);
-      console.log(table.table(answer2[1]))
+      console.log(chalk.blue(table.table(answer2[1])))
       return allapot;
     }   else 
         {

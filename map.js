@@ -2,6 +2,7 @@ const table = require('table');
 const axel = require('axel');
 const addtop = require('./topscores.json');
 const fs = require('fs');
+const chalk = require('chalk');
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
