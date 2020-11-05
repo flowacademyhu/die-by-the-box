@@ -188,6 +188,7 @@ const move_d = (player, tomb_ami_a_map) => {
 
 const playerDeath = (dobozok, jatekos, allapot) => {
   let answer2 = []
+  let cimlec = [ 'Points', 'Names' ]
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
       if (jatekos.lives < 1) {
@@ -199,9 +200,25 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log('Your points:', jatekos.points);
       answer2 = map.newRecord(jatekos.points, jatekos.name);
       console.log(answer2[0]);
-      console.log(table.table(answer2[1]))
+      answer2[1].unshift(cimlec);
+      let god = table.table(answer2[1], {
+        columnDefault: {
+          width:10
+        },
+        columnCount: 2,
+        columns: {
+          0: {
+            width: 10,
+            alignment: 'center'
+          },
+          1: {
+            alignment: 'center',
+          }
+        }
+      });
+      console.log(god);
       return allapot;
-    }   else 
+    }   else
         {
         jatekos.lives--;
         }
