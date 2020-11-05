@@ -1,8 +1,9 @@
 const table = require('table');
 const axel = require('axel');
-const topscores = require('./topscores.json');
-const fs = require('fs');
 const addtop = require('./topscores.json');
+const fs = require('fs');
+
+
 
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
@@ -55,43 +56,43 @@ const drawMap = (map) => {
   console.log(text);
 };
 const addTopScore = (pointscollected, player) => {
-  for ( i = 0; i < topscores.length; i++ ) {
-  if (pointscollected > topscores[i].points) {
-    topscores[i].points = player.points;
-    topscores[i].name = player.name;
-    break
-  }
-}
-  fs.readFile('./topscores.json', 'utf8', (err, data) => {
-
-    if (err) {
-        console.log(`Error reading file from disk: ${err}`);
-    } else {
-
+//   let tempobject = {"name": '', "points": 0}
+//   for ( i = 0; i < topscores.length; i++ ) {
+//   if (pointscollected > topscores[i].points) {
+//     tempobject.points = player.points;
+//     tempobject.name = player.name;
+//     topscores.push(tempobject);
+//     break
+//   }
+// }
+console.log('Json Starts')
+const data = fs.readFileSync('./topscores.json', 'utf8')
+console.log('Data:', data)
         // parse JSON string to JSON object
-        const databases = JSON.parse(data);
-
+        let databases = JSON.parse(data);
+console.log('Data Base: ', databases)
         // add a new record
         databases.push({
             name: player,
             points: pointscollected
         });
-
+        databases = JSON.stringify(databases, null, 4)
+console.log('DB_NEW:', databases)
+console.log('writingData');
         // write new data back to the file
-        fs.writeFile('./topscores.json', JSON.stringify(databases, null, 4), (err) => {
+        fs.writeFileSync('topscores.json', databases, (err) => {
             if (err) {
                 console.log(`Error writing file: ${err}`);
             }
+            console.log('Written to File')
         });
-    }
 
-})
 };
 
-const generateTopScores = (nOfScores) => { //és ki is írja
+const generateTopScores = (nOfScores) => {  //és ki is írja
   let arrForTop = [];
   for ( i = 0; i < addtop.length; i++ ) {
-      arrForTop.push([addtop[i].points ,addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
+      arrForTop.push([addtop[i].points, addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
   };
   arrForTop.sort(sortFunction); //sorba rendezi a tömböt
   function sortFunction(a, b) {
@@ -111,13 +112,21 @@ const generateTopScores = (nOfScores) => { //és ki is írja
   return arrForTopN;
   };
 
-  let newRecord = (points, nOfScores) => {
-    let top = generateTopScores(nOfScores);
-    if (points > top[nOfScores-1][0]) {
-      return 'Yaay! Your score is in TOP5 now! \n Congratulations!'
-    } else {
-      return 'Not good, not terrible.' 
-    }
+  let newRecord = (points, name) => {
+    let top = generateTopScores(5);
+    let answer = []
+    for (let i = 0; i < top.length ; i++ ) {
+      if (points > top[i][0]) {
+        top.splice(i, 0, [points, name]);
+        top.pop();
+        answer.push('Yaay! Your score is in TOP5 now! \n Congratulations!\n\n')
+        answer.push(top)
+        return answer
+      } 
+    } 
+    answer.push('Not good, not terrible.')
+    answer.push(top);
+    return answer
   }
 
 
