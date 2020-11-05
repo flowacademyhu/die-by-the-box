@@ -185,9 +185,9 @@ const move_d = (player, tomb_ami_a_map) => {
       }
   }
 }
-
 const playerDeath = (dobozok, jatekos, allapot) => {
   let answer2 = []
+  let cimlec = [ 'Points', 'Names' ]
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1 ) {
       if (jatekos.lives < 1) {
@@ -199,6 +199,7 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       console.log('Your points:', jatekos.points);
       answer2 = map.newRecord(jatekos.points, jatekos.name);
       console.log(answer2[0]);
+      answer2[1].unshift(cimlec);
       console.log(table.table(answer2[1]))
       return allapot;
     }   else 
@@ -208,8 +209,6 @@ const playerDeath = (dobozok, jatekos, allapot) => {
     }
   }
 };
-
-
 module.exports = {
   move_a,
   move_d,

@@ -52,7 +52,6 @@ const theGameItself = () => {
     player.name = name;
     rl.close();
   });
-
   rl.on("close", function () {
 
     setInterval(() => {

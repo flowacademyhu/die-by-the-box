@@ -3,8 +3,6 @@ const axel = require('axel');
 const addtop = require('./topscores.json');
 const fs = require('fs');
 
-
-
 const palyaKeret = (szelesseg, magassag) => {
   const hasznalttomb = new Array(magassag);
   for (let i = 0; i < hasznalttomb.length; i++) {
