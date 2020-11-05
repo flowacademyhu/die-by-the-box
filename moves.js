@@ -189,7 +189,21 @@ const playerDeath = (dobozok, jatekos, allapot) => {
         answer2 = map.newRecord(jatekos.points, jatekos.name);
         console.log((chalk.green(answer2[0])));
         answer2[1].unshift(cimlec);
-        console.log(chalk.yellow.bold(table.table(answer2[1])));
+        const god = table.table(answer2[1], {
+          columnDefault: {
+            width: 10
+          },
+          columnCount: 2,
+          columns: {
+            0: {
+              alignment: 'center'
+            },
+            1: {
+              alignment: 'center'
+            }
+          }
+        });
+        console.log(chalk.yellow.bold(god));
         return allapot;
       } else {
         jatekos.lives--;
