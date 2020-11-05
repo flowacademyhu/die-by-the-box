@@ -8,7 +8,7 @@ const chalk = require('chalk');
 const ezDoboz = (cella) => {
   if (cella === '📦') {
     return true;
-  } else { return false ;}
+  } else { return false; }
 };
 const ezUresVPenz = (cella) => {
   if (cella === '🎈') {
@@ -174,32 +174,29 @@ const move_d = (player, tomb_ami_a_map) => {
     }
   }
 };
-
 const playerDeath = (dobozok, jatekos, allapot) => {
   let answer2 = [];
-  const cimlec = ['pontok'];
+  const cimlec = ['Points', 'Names'];
   for (let i = 0; i < dobozok.length; i++) {
     if (dobozok[i].posy === jatekos.posy && dobozok[i].posx === jatekos.posx || jatekos.lives < 1) {
       if (jatekos.lives < 1) {
         allapot = true;
         console.clear();
         map.addTopScore(jatekos.points, jatekos.name);
-        console.log((chalk.blue('You are dead')));
+        console.log('You are dead');
         console.log(jatekos.name);
         console.log('Your points:', jatekos.points);
         answer2 = map.newRecord(jatekos.points, jatekos.name);
         console.log(answer2[0]);
-        console.log(answer2.unshift(cimlec));
+        answer2[1].unshift(cimlec);
         console.log(table.table(answer2[1]));
         return allapot;
-      } else
-      {
+      } else {
         jatekos.lives--;
       }
     }
   }
 };
-
 module.exports = {
   move_a,
   move_d,
