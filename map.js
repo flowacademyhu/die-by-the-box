@@ -65,26 +65,20 @@ const addTopScore = (pointscollected, player) => {
 //     break
 //   }
 // }
-console.log('Json Starts')
 const data = fs.readFileSync('./topscores.json', 'utf8')
-console.log('Data:', data)
         // parse JSON string to JSON object
         let databases = JSON.parse(data);
-console.log('Data Base: ', databases)
         // add a new record
         databases.push({
             name: player,
             points: pointscollected
         });
         databases = JSON.stringify(databases, null, 4)
-console.log('DB_NEW:', databases)
-console.log('writingData');
         // write new data back to the file
         fs.writeFileSync('topscores.json', databases, (err) => {
             if (err) {
                 console.log(`Error writing file: ${err}`);
             }
-            console.log('Written to File')
         });
 
 };
