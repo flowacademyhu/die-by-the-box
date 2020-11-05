@@ -185,7 +185,6 @@ const move_d = (player, tomb_ami_a_map) => {
       }
   }
 }
-
 const playerDeath = (dobozok, jatekos, allapot) => {
   let answer2 = []
   let cimlec = [ 'Points', 'Names' ]
@@ -225,8 +224,6 @@ const playerDeath = (dobozok, jatekos, allapot) => {
     }
   }
 };
-
-
 module.exports = {
   move_a,
   move_d,
