@@ -183,10 +183,10 @@ const theGameItself = () => {
           return index === 0 || index === size;
         }
       });
-      console.log(renderelt);
+      console.log(chalk.yellow.bold(renderelt));
       // lehetnyomni
       if (key === 'q') {
-        console.log('Quitter! You might as well quit life too!!!');
+        console.log(chalk.red.bold('Quitter! You might as well quit life too!!!'));
         process.exit(0);
       }
     });
@@ -202,7 +202,7 @@ term.singleColumnMenu(items, function (error, response) {
   } else if (choice === 'Hall of Fame') {
     fs.readFile('./topscores.json', 'utf8', (err, data) => {
       if (err) {
-        console.log(`Error reading file from disk: ${err}`);
+        console.log(chalk.red(`Error reading file from disk: ${err}`));
       } else {
         // parse JSON string to JSON object
         const allEntries = JSON.parse(data);
@@ -218,10 +218,10 @@ term.singleColumnMenu(items, function (error, response) {
           allEntries[l + 1] = tarolo;
         }
         console.log('');
-        console.log('Retrieving Data...');
+        console.log(chalk.green('Retrieving Data...'));
         console.log('');
         console.log('');
-        console.log('Match Found!');
+        console.log(chalk.green('Match Found!'));
 
         for (let z = 0; z < 5; z++) {
           ideiglenesTarolo = [];
@@ -229,10 +229,10 @@ term.singleColumnMenu(items, function (error, response) {
           ideiglenesTarolo.push(allEntries[z].points);
           ideiglenesTomb.push(ideiglenesTarolo);
         }
-        ideiglenesTomb.unshift(['Names' , 'Points'])
-        let borderingIdeiglenes = table.table(ideiglenesTomb, {
+        ideiglenesTomb.unshift(['Names', 'Points']);
+        const borderingIdeiglenes = table.table(ideiglenesTomb, {
           columnDefault: {
-            width:20
+            width: 20
           },
           columnCount: 2,
           columns: {
@@ -240,13 +240,13 @@ term.singleColumnMenu(items, function (error, response) {
               alignment: 'center'
             },
             1: {
-              alignment: 'center',
+              alignment: 'center'
             }
           }
         });
-        console.log(borderingIdeiglenes)
-        console.log('Press * to quit.')
-        console.log('Press - to begin your journey.')
+        console.log(chalk.yellow.bold(borderingIdeiglenes));
+        console.log(chalk.green('Press * to quit.'));
+        console.log(chalk.green.bold('Press - to begin your journey.'));
         const stdin = process.stdin;
         stdin.setRawMode(true);
         stdin.resume();
@@ -254,7 +254,7 @@ term.singleColumnMenu(items, function (error, response) {
         stdin.on('data', (key) => {
           // spamszamlalo
           if (key === '*') {
-            console.log('See you around, Space Cowboy!');
+            console.log(chalk.green('See you around, Space Cowboy!'));
             process.exit(0);
           }
           if (key === '-') {
