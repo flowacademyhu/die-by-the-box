@@ -31,7 +31,16 @@ let isDead = false;
 const nOfScores = 5;
 tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
 
-term.cyan('Welcome to the World of Madness!\n');
+term.cyan('Welcome to the World of\n')
+console.log('');
+term.red('DDD             BBBB           TTTTTT h            BBBB\n')
+term.red('D  D ii         B   B            TT   h            B   B\n')
+term.red('D  D    eee     BBBB  y  y       TT   hhh  eee     BBBB  ooo x x\n')
+term.red('D  D ii e e     B   B y  y       TT   h  h e e     B   B o o  x\n')
+term.red('DDD  ii ee      BBBB   yyy       TT   h  h ee      BBBB  ooo x x\n')
+term.red('                         y\n')
+term.red('                      yyy\n');
+console.log('');
 term.cyan('\'Tis a world of mortal dangers, where bestial boxes prey on the unwary.\n');
 
 let choice = '';
