@@ -18,6 +18,7 @@
   "homepage": "https://github.com/flowacademyhu/die-by-the-box#readme",
   "dependencies": {
     "axel": "0.0.3",
+    "chalk": "^4.1.0",
     "table": "^6.0.3",
     "terminal-kit": "^1.44.0"
   }
