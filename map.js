@@ -21,19 +21,25 @@ const palyaKitoltes = (kitoltendo, player, boxstuff, scorestuff) => {
         }
       }
       if ((i === player.posy) && (k === player.posx)) {
-        if (player.head === 'top' && player.facing === 'right'){
-          kitoltendo[i][k] = '👉';}
-        if (player.head === 'left' && player.facing === 'right'){
-          kitoltendo[i][k] = '👍';}
-        if (player.head === 'left' && player.facing === 'left'){
-            kitoltendo[i][k] = '👎';}
-        if (player.head === 'right' && player.facing === 'right'){
-          kitoltendo[i][k] = '👇';}
-        if (player.head === 'right' && player.facing === 'left'){
-            kitoltendo[i][k] = '👍';}
-        if (player.head === 'top' && player.facing === 'left'){
-            kitoltendo[i][k] = '👈';}
+        if (player.head === 'top' && player.facing === 'right') {
+          kitoltendo[i][k] = '👉';
         }
+        if (player.head === 'left' && player.facing === 'right') {
+          kitoltendo[i][k] = '👍';
+        }
+        if (player.head === 'left' && player.facing === 'left') {
+          kitoltendo[i][k] = '👎';
+        }
+        if (player.head === 'right' && player.facing === 'right') {
+          kitoltendo[i][k] = '👇';
+        }
+        if (player.head === 'right' && player.facing === 'left') {
+          kitoltendo[i][k] = '👍';
+        }
+        if (player.head === 'top' && player.facing === 'left') {
+          kitoltendo[i][k] = '👈';
+        }
+      }
       for (let l = 0; l < boxstuff.length; l++) {
         if (i === boxstuff[l].posy && k === boxstuff[l].posx) {
           kitoltendo[i][k] = '📦';
@@ -64,70 +70,67 @@ const addTopScore = (pointscollected, player) => {
 //     break
 //   }
 // }
-const data = fs.readFileSync('./topscores.json', 'utf8')
-        // parse JSON string to JSON object
-        let databases = JSON.parse(data);
-        // add a new record
-        databases.push({
-            name: player,
-            points: pointscollected
-        });
-        databases = JSON.stringify(databases, null, 4)
-        // write new data back to the file
-        fs.writeFileSync('topscores.json', databases, (err) => {
-            if (err) {
-                console.log(`Error writing file: ${err}`);
-            }
-        });
-
+  const data = fs.readFileSync('./topscores.json', 'utf8');
+  // parse JSON string to JSON object
+  let databases = JSON.parse(data);
+  // add a new record
+  databases.push({
+    name: player,
+    points: pointscollected
+  });
+  databases = JSON.stringify(databases, null, 4);
+  // write new data back to the file
+  fs.writeFileSync('topscores.json', databases, (err) => {
+    if (err) {
+      console.log(`Error writing file: ${err}`);
+    }
+  });
 };
 
-const generateTopScores = (nOfScores) => {  //és ki is írja
-  let arrForTop = [];
-  for ( i = 0; i < addtop.length; i++ ) {
-      arrForTop.push([addtop[i].points, addtop[i].name]);  //A teljes JSON-t tömbbe pakolja
-  };
-  arrForTop.sort(sortFunction); //sorba rendezi a tömböt
-  function sortFunction(a, b) {
-      if (a[0] === b[0]) {
-          return 0;
-      }
-      else {
-          return (a[0] < b[0]) ? -1 : 1;
-      }
+const generateTopScores = (nOfScores) => { // és ki is írja
+  const arrForTop = [];
+  for (i = 0; i < addtop.length; i++) {
+    arrForTop.push([addtop[i].points, addtop[i].name]); // A teljes JSON-t tömbbe pakolja
   }
-  //console.log(arrForTop);
+  arrForTop.sort(sortFunction); // sorba rendezi a tömböt
+  function sortFunction (a, b) {
+    if (a[0] === b[0]) {
+      return 0;
+    } else {
+      return (a[0] < b[0]) ? -1 : 1;
+    }
+  }
+  // console.log(arrForTop);
   // If nOfScores több mint amennyi score van
-  let arrForTopN = [];
-  for (i = arrForTop.length-1; i >= arrForTop.length-nOfScores; i--) { //kii
+  const arrForTopN = [];
+  for (i = arrForTop.length - 1; i >= arrForTop.length - nOfScores; i--) { // kii
     arrForTopN.push(arrForTop[i]);
   }
   return arrForTopN;
-  };
+};
 
-  let newRecord = (points, name) => {
-    let top = generateTopScores(5);
-    let answer = []
-    for (let i = 0; i < top.length ; i++ ) {
-      if (points > top[i][0]) {
-        top.splice(i, 0, [points, name]);
-        top.pop();
-        answer.push('Yaay! Your score is in TOP5 now! \n Congratulations!\n\n')
-        answer.push(top)
-        return answer
-      } 
-    } 
-    answer.push('Not good, not terrible.')
-    answer.push(top);
-    return answer
+const newRecord = (points, name) => {
+  const top = generateTopScores(5);
+  const answer = [];
+  for (let i = 0; i < top.length; i++) {
+    if (points > top[i][0]) {
+      top.splice(i, 0, [points, name]);
+      top.pop();
+      answer.push('Yaay! Your score is in TOP5 now! \n Congratulations!\n\n');
+      answer.push(top);
+      return answer;
+    }
   }
-
+  answer.push('Not good, not terrible.');
+  answer.push(top);
+  return answer;
+};
 
 module.exports = {
-    palyaKeret,
-    palyaKitoltes,
-    drawMap,
-    addTopScore,
-    generateTopScores,
-    newRecord
-  };
+  palyaKeret,
+  palyaKitoltes,
+  drawMap,
+  addTopScore,
+  generateTopScores,
+  newRecord
+};
