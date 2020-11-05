@@ -14,11 +14,12 @@ const ezDoboz = (cella) => {
 }
 const ezUresVPenz = (cella) => {
   if (cella === '🎈') {
-    return cella
+    return true
   }
   else if (cella === ' ') {
-    return cella
+    return true
   }
+  return false
 }
 const ezLetezik = (kerdeses) => {
   return kerdeses !== undefined;
@@ -88,12 +89,12 @@ const move_a = (player, tomb_ami_a_map) => {
       player.head = 'top';
       player.facing = 'left';
     }
-    else if (egyenesenAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1]) ) )) {
+    else if (egyenesenAll(allasa) && (Vertikalis === mapmagassaga -1 || (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis - 1])) )) {
       player.posx--;
       player.head = 'top';
       player.facing = 'left';
     }
-    else if ( fejeJobbraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+    else if ( fejeJobbraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
       player.facing = 'left'
       player.head = 'top'
     }
@@ -163,12 +164,12 @@ const move_d = (player, tomb_ami_a_map) => {
     else if (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && (ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis]) || Vertikalis === mapmagassaga - 1) && fejeJobbraAll(allasa)) {
       player.head = 'top';
     }
-    else if (egyenesenAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+    else if (egyenesenAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
       player.posx++
       player.facing = 'right'
       player.head = 'top'
     }
-    else if ( fejeBalraAll(allasa) && (Vertikalis === mapmagassaga -1 || ( ezLetezik(Vertikalis + 1) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
+    else if ( fejeBalraAll(allasa) && (Vertikalis === mapmagassaga -1 || (ezLetezik(tomb_ami_a_map[Vertikalis + 1]) && ezDoboz(tomb_ami_a_map[Vertikalis + 1][Horizontalis])))){
       player.facing = 'right'
       player.head = 'top'
     }
@@ -201,9 +202,23 @@ const playerDeath = (dobozok, jatekos, allapot) => {
       answer2 = map.newRecord(jatekos.points, jatekos.name);
       console.log(answer2[0]);
       answer2[1].unshift(cimlec);
-      console.log(chalk.blue(table.table(answer2[1])))
+      let god = table.table(answer2[1], {
+        columnDefault: {
+          width:10
+        },
+        columnCount: 2,
+        columns: {
+          0: {
+            alignment: 'center'
+          },
+          1: {
+            alignment: 'center',
+          }
+        }
+      });
+      console.log(god);
       return allapot;
-    }   else 
+    }   else
         {
         jatekos.lives--;
         }
