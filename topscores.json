@@ -28,7 +28,6 @@
         "points": 0
     },
     {
-<<<<<<< HEAD
         "name": "Jon",
         "points": 4
     },
@@ -103,9 +102,13 @@
     {
         "name": "bDSKFUDSHFBCISUBVJDBJSVNJKYSHIVLDGRN",
         "points": 8
-=======
-        "name": "Ga",
-        "points": 0
->>>>>>> a7a20acd09d9cefa4c75bf11f35a91d3dabfef61
+    },
+    {
+        "name": "Barbi",
+        "points": 8
+    },
+    {
+        "name": "bidhgab",
+        "points": 8
     }
 ]

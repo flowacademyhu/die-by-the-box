@@ -207,7 +207,6 @@ const playerDeath = (dobozok, jatekos, allapot) => {
         columnCount: 2,
         columns: {
           0: {
-            width: 10,
             alignment: 'center'
           },
           1: {
