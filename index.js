@@ -209,6 +209,7 @@ term.singleColumnMenu(items, function (error, response) {
   if (choice === 'New Game') {
     theGameItself();
   } else if (choice === 'Hall of Fame') {
+    console.clear();
     fs.readFile('./topscores.json', 'utf8', (err, data) => {
       if (err) {
         console.log(chalk.red(`Error reading file from disk: ${err}`));
@@ -228,8 +229,7 @@ term.singleColumnMenu(items, function (error, response) {
         }
         console.log('');
         console.log(chalk.green('Retrieving Data...'));
-        console.log('');
-        console.log('');
+        console.log(chalk.green('...'));
         console.log(chalk.green('Match Found!'));
 
         for (let z = 0; z < 5; z++) {
