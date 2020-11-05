@@ -191,7 +191,7 @@ const playerDeath = (dobozok, jatekos, allapot) => {
         answer2[1].unshift(cimlec);
         const god = table.table(answer2[1], {
           columnDefault: {
-            width: 10
+            width: 20
           },
           columnCount: 2,
           columns: {
