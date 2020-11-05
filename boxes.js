@@ -51,7 +51,6 @@ const alsotSzamolSzam = (boxok, magassag) => {
 const alsotSzamolTomb = (boxok, magassag) => {
     let tartotomb = []
     for (let k = 0; k < boxok.length; k++) {
-        tartotomb
        if (boxok[k].posy === magassag-1) {
            tartotomb.push(boxok[k])
        }
