@@ -183,13 +183,13 @@ const playerDeath = (dobozok, jatekos, allapot) => {
         allapot = true;
         console.clear();
         map.addTopScore(jatekos.points, jatekos.name);
-        console.log('You are dead');
-        console.log(jatekos.name);
-        console.log('Your points:', jatekos.points);
+        console.log(chalk.yellow('You are dead'));
+        console.log(chalk.green.bold(jatekos.name));
+        console.log((chalk.yellow('Your points:')), (chalk.green.bold(jatekos.points)));
         answer2 = map.newRecord(jatekos.points, jatekos.name);
-        console.log(answer2[0]);
+        console.log((chalk.green(answer2[0])));
         answer2[1].unshift(cimlec);
-        console.log(table.table(answer2[1]));
+        console.log(chalk.yellow.bold(table.table(answer2[1])));
         return allapot;
       } else {
         jatekos.lives--;
