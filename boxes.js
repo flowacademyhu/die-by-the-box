@@ -1,6 +1,3 @@
-const map = require("./map");
-const { playerDeath } = require("./moves");
-
 const spawnBoxes = (boxNum, szelesseg) => {
     let boxTomb = []
     let boxdarab = { posx: 0, posy: 0,}
