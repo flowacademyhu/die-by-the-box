@@ -1,10 +1,7 @@
-const map = require('./map');
 const { palyaKitoltes, palyaKeret } = require('./map');
 const boxes = require('./boxes');
 const table = require('table');
-const axel = require('axel');
 const moves = require('./moves.js');
-const addtopscore = require('./topscores.json');
 const falling = require('./falling.js');
 const fs = require('fs');
 const chalk = require('chalk');
