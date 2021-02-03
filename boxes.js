@@ -102,12 +102,12 @@ const ScoreTorlesScore = (scoreTomb, jatekos, dobozok) => {
      return eredmeny
 }
 
-const ScorePlayer = (scoreTomb, jatekos) => {
+const scorePlayer = (scoreTomb, jatekos) => {
     let talalatok = 0;
     
     for (let l = 0; l < scoreTomb.length; l++) {
         talalatok = 0;
-        
+
         if (scoreTomb[l].posy === jatekos.posy && scoreTomb[l].posx === jatekos.posx) {
             jatekos.points++
         }
@@ -140,6 +140,6 @@ module.exports = {
     alsotTorol,
     spawnInterval,
     ScoreTorlesScore,
-    ScorePlayer,
+    scorePlayer,
     diffSum
 };

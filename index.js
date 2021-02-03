@@ -69,7 +69,7 @@ const theGameItself = () => {
       // score eses
       scoremany = falling.fallingScore(scoremany, boxmany, tomb_ami_a_map);
       // score torles
-      player.points = boxes.ScorePlayer(scoremany, player);
+      player.points = boxes.scorePlayer(scoremany, player);
       scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
       // esik-e
       if (player.posy !== magassag - 1 && ((tomb_ami_a_map[player.posy + 1] !== undefined && (tomb_ami_a_map[player.posy][player.posx - 1] === ' ' || tomb_ami_a_map[player.posy][player.posx - 1] === undefined) && (tomb_ami_a_map[player.posy][player.posx + 1] === ' ' || tomb_ami_a_map[player.posy][player.posx + 1] === undefined) && tomb_ami_a_map[player.posy + 1][player.posx] === ' ') || (tomb_ami_a_map[player.posy + 1] !== undefined && tomb_ami_a_map[player.posy + 1][player.posx] === '🎈'))) {
@@ -155,7 +155,7 @@ const theGameItself = () => {
       if (key === 'd') {
         moves.move_d(player, tomb_ami_a_map);
       }
-      player.points = boxes.ScorePlayer(scoremany, player);
+      player.points = boxes.scorePlayer(scoremany, player);
       scoremany = boxes.ScoreTorlesScore(scoremany, player, boxmany);
       console.clear();
       tomb_ami_a_map = palyaKitoltes(tomb_ami_a_map, player, boxmany, scoremany);
