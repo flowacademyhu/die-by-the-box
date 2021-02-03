@@ -104,13 +104,15 @@ const ScoreTorlesScore = (scoreTomb, jatekos, dobozok) => {
 
 const ScorePlayer = (scoreTomb, jatekos) => {
     let talalatok = 0;
+    
     for (let l = 0; l < scoreTomb.length; l++) {
         talalatok = 0;
         if (scoreTomb[l].posy === jatekos.posy && scoreTomb[l].posx === jatekos.posx) {
         jatekos.points++
         }
-}
-     return jatekos.points
+    }
+    
+    return jatekos.points
 }
 
 
